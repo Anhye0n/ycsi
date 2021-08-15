@@ -9,5 +9,5 @@ app.use('/', serveStatic(path.join(__dirname, 'views')))
 // })
 
 app.listen(8088, function () {
-    console.log('ycsi server is open(port: 80) http://anhye0n.me/ycsi')
+    console.log('ycsi server is open(port: 8088) http://anhye0n.me:8088')
 })
