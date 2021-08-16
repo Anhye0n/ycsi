@@ -1,13 +1,14 @@
 const express = require('express')
 const app = express()
 
-const path = require('path'), serveStatic = require('serve-static')
+const bodyParser = require('body-parser'), path = require('path'), serveStatic = require('serve-static')
 
-app.use('/', serveStatic(path.join(__dirname, 'views')))
 
 app.use(bodyParser.urlencoded({extend: false}))
 
 app.use(bodyParser.json())
+
+app.set('/', path.join(__dirname, 'views'))
 
 app.get("*", (req, res, next) => {
     console.log("req.secure == " + req.secure);
@@ -23,6 +24,8 @@ app.get("*", (req, res, next) => {
         return res.redirect("https://" + req.headers.host + req.url);
     }
 })
+
+app.use('/', path.join(__dirname, 'views'))
 
 const http = require("http")
 const https = require("https")
