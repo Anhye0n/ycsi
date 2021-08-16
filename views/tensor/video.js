@@ -119,6 +119,11 @@ async function process() {
                 ctx.strokeStyle = 'red'; // 선 색
                 ctx.lineWidth = 5 // px단위
                 ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+
+                // ctx.strokeStyle = 'red'; // 선 색
+                // ctx.lineWidth = 5 // px단위
+                // ctx.drawImage(video, x1, y1, x2 - x1, y2 - y1)
+
                 console.log(cls[maxSup[i]]);
             }
             // let rect = new cv.Rect(x_mean - width/2 + 54, y_mean - height/2, width, height);
