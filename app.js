@@ -3,6 +3,7 @@ const app = express()
 
 const bodyParser = require('body-parser'), path = require('path'), serveStatic = require('serve-static'), favicon = require('serve-favicon')
 
+app.use(favicon(path.join(__dirname, './views/src/img', 'favicon.ico')));
 
 app.use(bodyParser.urlencoded({extend: false}))
 
@@ -26,7 +27,6 @@ app.get("*", (req, res, next) => {
 })
 
 app.use('/', serveStatic(path.join(__dirname, 'views')))
-app.use(favicon(path.join(__dirname, './views/src/img', 'favicon.ico')));
 
 const http = require("http")
 const https = require("https")
