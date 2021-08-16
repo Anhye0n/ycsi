@@ -13,7 +13,8 @@ function setSize() {
 }
 
 const constraints = {
-    video: {facingMode: "environment"}, audio: false
+    // video: {facingMode: "environment"}, audio: false
+    video: {facingMode: "user"}, audio: false
 };
 const video = document.getElementById("video");
 const canvas = document.getElementById('output');
@@ -23,22 +24,20 @@ const ctx = canvas.getContext('2d');
 canvas.width = width;
 canvas.height = height;
 
-function successCallback(stream) {
-    video.width = width;
-    video.height = height;//prevent Opencv.js error.
-    video.srcObject = stream;
-    video.play();
-}
-
-function errorCallback(error) {
-    console.log(error);
-}
-
 let streaming = false;
 
 function toggleStream() {
     if (streaming === false) {
-        navigator.getUserMedia(constraints, successCallback, errorCallback);
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (stream) {
+                video.width = width;
+                video.height = height;//prevent Opencv.js error.
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         document.getElementById('toggleStream').innerHTML = "Stop";
         document.getElementById('cvtGray').style.visibility = 'visible';
     } else {
@@ -60,6 +59,14 @@ function cvtGray() {
     cap = new cv.VideoCapture('video');
     setTimeout(process, 300);
 }
+
+let classes = {
+    '0': '칠성사이다',
+    '1': '스프라이트'
+}
+
+
+let identified = document.getElementById('identified')
 
 async function process() {
     if (streaming === true) {
@@ -108,9 +115,10 @@ async function process() {
             maxSup = Array.from(maxSup);
 
             cv.imshow('output', dst);
+            if (maxSup.length === 0){
+                identified.innerHTML = '식별된 캔이 없습니다.';
+            }
             for (i = 0; i < maxSup.length; i++) {
-                //console.log(maxSup[i]);
-                //console.log(array1[maxSup[i]]);
                 x1 = parseInt(xy_array[maxSup[i]][0]);
                 y1 = parseInt(xy_array[maxSup[i]][1]);
                 x2 = parseInt(xy_array[maxSup[i]][2]);
@@ -120,9 +128,11 @@ async function process() {
                 ctx.lineWidth = 5 // px단위
                 ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
 
-                // ctx.strokeStyle = 'red'; // 선 색
-                // ctx.lineWidth = 5 // px단위
-                // ctx.drawImage(video, x1, y1, x2 - x1, y2 - y1)
+                if (maxSup.length === 1){
+                    identified.innerHTML = classes[cls[maxSup[i]]];
+                } else if (maxSup.length === 2){
+                    identified.innerHTML = classes[0] + ', ' + classes[1];
+                }
 
                 console.log(cls[maxSup[i]]);
             }

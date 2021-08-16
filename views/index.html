@@ -7,7 +7,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <META HTTP-EQUIV='Pragma' CONTENT='no-cache'>
+    <META http-equiv="Expires" content="-1">
     <link rel="stylesheet" href="src/css/main.css">
 
 </head>
@@ -20,6 +22,8 @@
     <button id="toggleStream" onclick="toggleStream()">Play</button>
     <button id="cvtGray" onclick="cvtGray()" style="visibility: hidden;">Convert to Gray</button>
 </div>
+<h2>식별된 캔</h2>
+<p id="identified">식별된 캔이 없습니다.</p>
 <br>
 <br>
 <video id="video"></video>
@@ -28,5 +32,4 @@
 
 </body>
 <script src="tensor/video.js"></script>
-<script src="tensor/crop.js"></script>
 </html>
