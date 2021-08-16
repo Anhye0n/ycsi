@@ -77,7 +77,6 @@ async function process() {
         cv.cvtColor(dst, test, cv.COLOR_RGBA2RGB);
         test = tf.tensor(test.data, [320, 320, 3]);
 
-        // ctx.drawImage(dst, video.width / 2 - 160, video.height / 2 - 160, 320, 320, 0, 0, 320, 320)
 
         //console.log(dst_tensor);
         //tf.loadGraphModel('./model/model.json').then(function (model){
@@ -126,6 +125,7 @@ async function process() {
                 x2 = parseInt(xy_array[maxSup[i]][2]);
                 y2 = parseInt(xy_array[maxSup[i]][3]);
 
+                ctx.drawImage(video, video.width / 2 - 160, video.height / 2 - 160, 320, 320, 0, 0, 320, 320)
                 ctx.strokeStyle = 'red'; // 선 색
                 ctx.lineWidth = 5 // px단위
                 ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
