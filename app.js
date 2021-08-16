@@ -3,7 +3,7 @@ const app = express()
 
 const bodyParser = require('body-parser'), path = require('path'), serveStatic = require('serve-static'), favicon = require('serve-favicon')
 
-app.use(favicon(path.join(__dirname, './src/img', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, './views/src/img', 'favicon.ico')));
 
 app.use(bodyParser.urlencoded({extend: false}))
 
