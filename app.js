@@ -4,15 +4,6 @@ const app = express()
 
 app.use('/', serveStatic(path.join(__dirname, 'views')))
 
-const http = require("http")
-const https = require("https")
-const fs = require("fs")
-
-let privateKey = fs.readFileSync("/etc/letsencrypt/live/anhye0n.me/privkey.pem")
-let certificate = fs.readFileSync("/etc/letsencrypt/live/anhye0n.me/cert.pem")
-let ca = fs.readFileSync("/etc/letsencrypt/live/anhye0n.me/chain.pem")
-const credentials = {key: privateKey, cert: certificate, ca: ca}
-
 app.get("*", (req, res, next) => {
     console.log("req.secure == " + req.secure);
 
@@ -27,6 +18,16 @@ app.get("*", (req, res, next) => {
         return res.redirect("https://" + req.headers.host + req.url);
     }
 })
+
+const http = require("http")
+const https = require("https")
+const fs = require("fs")
+
+let privateKey = fs.readFileSync("/etc/letsencrypt/live/anhye0n.me/privkey.pem")
+let certificate = fs.readFileSync("/etc/letsencrypt/live/anhye0n.me/cert.pem")
+let ca = fs.readFileSync("/etc/letsencrypt/live/anhye0n.me/chain.pem")
+const credentials = {key: privateKey, cert: certificate, ca: ca}
+
 
 // Starting both http & https servers
 const httpServer = http.createServer(app);
