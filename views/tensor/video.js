@@ -57,9 +57,8 @@ let src, dist, cap;
 
 function cvtGray() {
     src = new cv.Mat(height, width, cv.CV_8UC4);
-    dst = new cv.Mat(height, width, cv.CV_8UC1);
     cap = new cv.VideoCapture('video');
-    setTimeout(process, 33);
+    setTimeout(process, 300);
 }
 
 async function process() {
@@ -67,6 +66,10 @@ async function process() {
         cap.read(src);
         let rect = new cv.Rect(54, 0, 320, 320);
         dst = src.roi(rect);
+        let test = new cv.Mat();
+        cv.cvtColor(dst, test, cv.COLOR_RGBA2RGB);
+        test = tf.tensor(test.data, [320, 320, 3]);
+
         //console.log(dst_tensor);
         //tf.loadGraphModel('./model/model.json').then(function (model){
         //console.log(model.predict(dst_tensor));
@@ -74,8 +77,10 @@ async function process() {
         //cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY);
         //let rect = new cv.Rect(108, 0, 748, 640);
         //dst = dst.roi(rect);
-        cv.imshow('output', dst);
-        dst_tensor = tf.browser.fromPixels(document.getElementById('output'));
+        //cv.imshow('output', dst);
+        //dst_tensor = tf.browser.fromPixels(document.getElementById('output'));
+        //console.log(dst_tensor.sub(test).data());
+        dst_tensor = test;
         dst_tensor = dst_tensor.expandDims(0);
         dst_tensor = dst_tensor.div(tf.scalar(255));
         //console.log(dst_tensor);
@@ -102,7 +107,7 @@ async function process() {
             maxSup = maxSup.dataSync();
             maxSup = Array.from(maxSup);
 
-
+            cv.imshow('output', dst);
             for (i = 0; i < maxSup.length; i++) {
                 //console.log(maxSup[i]);
                 //console.log(array1[maxSup[i]]);
@@ -124,6 +129,6 @@ async function process() {
             //output_tensor = model.predict(dst_tensor);
             //console.log(output_tensor);
         });
-        setTimeout(process, 1500);
+        setTimeout(process, 300);
     }
 }
