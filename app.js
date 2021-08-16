@@ -25,7 +25,7 @@ app.get("*", (req, res, next) => {
     }
 })
 
-app.use('/', path.join(__dirname, 'views'))
+app.use('/', serveStatic(path.join(__dirname, 'views')))
 
 const http = require("http")
 const https = require("https")
