@@ -13,7 +13,7 @@ function setSize() {
 }
 
 const constraints = {
-    video: {facingMode: "user",}, audio: false
+    video: {facingMode: "environment"}, audio: false
 };
 const video = document.getElementById("video");
 const canvas = document.getElementById('output');
