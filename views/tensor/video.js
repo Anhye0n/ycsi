@@ -129,6 +129,6 @@ async function process() {
             //output_tensor = model.predict(dst_tensor);
             //console.log(output_tensor);
         });
-        setTimeout(process, 300);
+        setTimeout(process, 0);
     }
 }
