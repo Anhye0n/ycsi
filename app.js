@@ -12,4 +12,4 @@ app.listen(8088, function () {
     console.log('ycsi server is open(port: 8088) http://anhye0n.me:8088')
 })
 
-module.exports = app();
+module.exports = app;
