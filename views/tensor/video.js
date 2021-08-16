@@ -13,8 +13,8 @@ function setSize() {
 }
 
 const constraints = {
-    // video: {facingMode: "environment"}, audio: false
-    video: {facingMode: "user"}, audio: false
+    video: {facingMode: "environment"}, audio: false
+    // video: {facingMode: "user"}, audio: false
 };
 const video = document.getElementById("video");
 const canvas = document.getElementById('output');
@@ -77,6 +77,8 @@ async function process() {
         cv.cvtColor(dst, test, cv.COLOR_RGBA2RGB);
         test = tf.tensor(test.data, [320, 320, 3]);
 
+        // ctx.drawImage(dst, video.width / 2 - 160, video.height / 2 - 160, 320, 320, 0, 0, 320, 320)
+
         //console.log(dst_tensor);
         //tf.loadGraphModel('./model/model.json').then(function (model){
         //console.log(model.predict(dst_tensor));
@@ -115,7 +117,7 @@ async function process() {
             maxSup = Array.from(maxSup);
 
             cv.imshow('output', dst);
-            if (maxSup.length === 0){
+            if (maxSup.length === 0) {
                 identified.innerHTML = '식별된 캔이 없습니다.';
             }
             for (i = 0; i < maxSup.length; i++) {
@@ -128,9 +130,9 @@ async function process() {
                 ctx.lineWidth = 5 // px단위
                 ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
 
-                if (maxSup.length === 1){
+                if (maxSup.length === 1) {
                     identified.innerHTML = classes[cls[maxSup[i]]];
-                } else if (maxSup.length === 2){
+                } else if (maxSup.length === 2) {
                     identified.innerHTML = classes[0] + ', ' + classes[1];
                 }
 
