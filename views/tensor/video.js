@@ -38,7 +38,7 @@ let streaming = false;
 
 function toggleStream() {
     if (streaming === false) {
-        navigator.mediaDevices.getUserMedia(constraints, successCallback, errorCallback);
+        navigator.getUserMedia(constraints, successCallback, errorCallback);
         document.getElementById('toggleStream').innerHTML = "Stop";
         document.getElementById('cvtGray').style.visibility = 'visible';
     } else {
