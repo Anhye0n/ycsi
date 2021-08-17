@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+/*font-family: 'Do Hyeon', sans-serif;*/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap');
+/*font-family: 'Noto Sans KR', sans-serif;*/
+
 html, body {
     /*background: #6bac66;*/
     height: 100%;
@@ -8,15 +14,137 @@ html, body {
 }
 
 #logo {
-    width: 300px;
-    height: auto;
+    width: 100px;
+    height: 100px;
 }
 
 #logo_container {
-    margin: 50px auto;
+    justify-content: center;
+    margin: 20px auto;
+    margin-bottom: 0;
+}
+
+#identify_big{
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 2.2rem;
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+#identify_small{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 0;
+}
+
+#logo_text p {
+    color: #231F20;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 2.2rem;
+    margin-left: 20px;
+    margin-top: 30px;
+
 }
 
 #canvas_box {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+#move_content {
+    text-decoration: none;
+}
+
+#canvas_box p {
+    text-align: center;
+}
+
+#output {
+    transition: 0.3s;
+}
+
+#output:hover {
+    box-shadow: 10px 10px 20px #868686;
+    transition: 0.3s;
+    transform: translate(-5px, -5px);
+}
+
+#contents {
+    text-align: center;
+}
+
+.big_text {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.small_text {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#move_button,
+#move_button::after {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+#update{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+#move_button {
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    background: none;
+    border: 3px solid #000;
+    border-radius: 5px;
+    color: #000;
+    display: block;
+    margin: 1em auto;
+    padding: 0.5em 2.5em;
+    position: relative;
+    text-transform: uppercase;
+    overflow: hidden;
+}
+
+#move_button::before,
+#move_button::after {
+    background: #000;
+    content: '';
+    position: absolute;
+    z-index: -1;
+}
+
+#move_button:hover {
+    color: #ffffff;
+}
+
+#move_button::after {
+    /*background-color: #f00;*/
+    height: 100%;
+    left: -35%;
+    top: 0;
+    transform: skew(50deg);
+    transition-duration: 0.6s;
+    transform-origin: top left;
+    width: 0;
+}
+
+#move_button:hover:after {
+    height: 100%;
+    width: 135%;
 }
