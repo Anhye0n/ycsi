@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>YCSI</title>
     <meta charset="UTF-8">
@@ -14,14 +12,55 @@
 
     <!--css-->
     <link rel="stylesheet" href="./src/css/main.css">
-</head>
-<script src="https://docs.opencv.org/3.4/opencv.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
-<!--script async src="./opencv.js"></script-->
+    <link rel="stylesheet" href="./src/css/loader.css">
+    <script type="text/javascript">
+        function device_check() {
+            // 디바이스 종류 설정
+            const pc_device = "win16|win32|win64|mac|macintel";
 
-<body onload="setSize();">
+            // 접속한 디바이스 환경
+            const this_device = navigator.platform;
+
+            if ( this_device ) {
+                if ( pc_device.indexOf(navigator.platform.toLowerCase()) < 0 ) {
+                    console.log('MOBILE');
+
+                    const index_canvas = document.getElementById('output');
+                    index_canvas.style.width = '100%'
+                } else {
+                    console.log('PC');
+                }
+
+            }
+        }
+    </script>
+</head>
+
+<body onload="setSize(); device_check();">
+<div id="logo_container" style="display: none">
+    <img id="logo" src="./src/img/logo_oss.gif" alt="">
+</div>
+<div id="del_container">
+    <div id="loading-container">
+        <div class="loading"></div>
+        <div id="loading-text">loading</div>
+    </div>
+    <p id="link">Please wait for 5 seconds.</p>
+</div>
 <canvas id="output"></canvas>
 <video id="video" style="display: none;"></video>
 </body>
+
+<script src="https://docs.opencv.org/3.4/opencv.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
 <script src="./tensor/video.js"></script>
+<script type="text/javascript">
+    setTimeout(function () {
+        const container = document.getElementById('del_container');
+        const logo = document.getElementById('logo_container');
+
+        container.remove();
+        logo.style.display = 'inline-block'
+    }, 5000);
+</script>
 </html>

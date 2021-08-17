@@ -11,6 +11,14 @@ function setSize() {
         height = 642;
     }
 }
+
+const video = document.getElementById("video");
+const canvas = document.getElementById("output");
+
+let canvas_width = canvas.clientWidth
+alert(canvas_width)
+let squareSize = canvas_width
+
 let classes = {
     '0': 'Chilseong',
     '1': 'Sprite'
@@ -20,11 +28,10 @@ const constraints = {
     video: {facingMode: "environment",}, audio: false
 };
 
-const video = document.getElementById("video");
-const canvas = document.getElementById("output");
 const ctx = canvas.getContext('2d');
 //const xy_cal = tf.tensor2d([320, 0, 320, 0, 0, 320, 0, 320, -160, 0, 160, 0, 0, -160, 0, 160], [4, 4]);
-const xy_cal = tf.tensor2d([640, 0, 640, 0, 0, 640, 0, 640, -320, 0, 320, 0, 0, -320, 0, 320], [4, 4]);
+const xy_cal = tf.tensor2d([1, 0, 1, 0, 0, 1, 0, 1, -0.5, 0, 0.5, 0, 0, -0.5, 0, 0.5], [4, 4]).mul(tf.scalar(squareSize));
+
 
 canvas.width = width;
 canvas.height = height;
@@ -50,11 +57,11 @@ setTimeout(function() {
     window.setInterval(function(){
         process();
     },300);
-}, 2000);
+}, 5000);
 
 function process() {
     cap.read(src);
-    let rect = new cv.Rect(video.width / 2 - 320, video.height / 2 - 320, 640, 640);
+    let rect = new cv.Rect(video.width / 2 - squareSize / 2, video.height / 2 - squareSize / 2, squareSize, squareSize);
     let out_dst = src.roi(rect);
     let dst = new cv.Mat();
     let dsize = new cv.Size(320, 320);
