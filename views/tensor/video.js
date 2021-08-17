@@ -20,7 +20,7 @@ const ctx = canvas.getContext('2d');
 // let squareSize = canvas.clientWidth;
 let squareSize = 640;
 
-alert(squareSize)
+// alert(squareSize)
 
 let classes = {
     '0': 'Chilseong',
