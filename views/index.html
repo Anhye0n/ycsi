@@ -12,7 +12,7 @@
 
     <!--css-->
     <link rel="stylesheet" href="./src/css/main.css">
-        <link rel="stylesheet" href="./src/css/loader.css">
+    <link rel="stylesheet" href="./src/css/loader.css">
     <script type="text/javascript">
         function device_check() {
             // 디바이스 종류 설정
@@ -29,7 +29,7 @@
                     // alert(index_canvas.style.width)
                 } else {
                     console.log('PC');
-                    index_canvas.style.width = '640px'
+                    index_canvas.style.width = '600px'
                 }
             }
         }
@@ -42,7 +42,7 @@
         <div class="loading"></div>
         <div id="loading-text">loading</div>
     </div>
-    <p id="link">Please wait for 5 seconds.</p>
+    <p id="link">Please wait for 7 seconds.</p>
 </div>
 <div id="logo_container" style="display: none; text-align: center">
     <img id="logo" src="./src/img/kosslab_logo.png" alt="">
@@ -52,6 +52,8 @@
 </div>
 <a id="move_content" href="#contents"><button id="move_button">YCSI 란</button></a>
 <div id="canvas_box">
+    <p class="warning" style="color: #000000; font-size: 1rem;">캔을 카메라에 보여주세요!</p>
+    <p class="warning">※ 기능이 실행될 때까지 약간의 시간이 걸릴 수 있습니다.</p>
     <canvas id="output"></canvas>
     <video id="video" style="display: none;"></video>
     <p id="update">Last Update : 2021-08-18</p>
@@ -78,6 +80,6 @@
 
         container.remove();
         logo.style.display = 'flex'
-    }, 5000);
+    }, 7000);
 </script>
 </html>

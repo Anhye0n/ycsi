@@ -18,7 +18,7 @@ const ctx = canvas.getContext('2d');
 
 // alert('Mobile Width : ' + canvas_width);
 // let squareSize = canvas.clientWidth;
-let squareSize = 640;
+let squareSize = 600;
 
 // alert(squareSize)
 
