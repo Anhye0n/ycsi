@@ -14,10 +14,13 @@ function setSize() {
 
 const video = document.getElementById("video");
 const canvas = document.getElementById("output");
+const ctx = canvas.getContext('2d');
 
-let canvas_width = canvas.clientWidth
-alert(canvas_width)
-let squareSize = canvas_width
+// alert('Mobile Width : ' + canvas_width);
+// let squareSize = canvas.clientWidth;
+let squareSize = 640;
+
+alert(squareSize)
 
 let classes = {
     '0': 'Chilseong',
@@ -28,13 +31,12 @@ const constraints = {
     video: {facingMode: "environment",}, audio: false
 };
 
-const ctx = canvas.getContext('2d');
 //const xy_cal = tf.tensor2d([320, 0, 320, 0, 0, 320, 0, 320, -160, 0, 160, 0, 0, -160, 0, 160], [4, 4]);
 const xy_cal = tf.tensor2d([1, 0, 1, 0, 0, 1, 0, 1, -0.5, 0, 0.5, 0, 0, -0.5, 0, 0.5], [4, 4]).mul(tf.scalar(squareSize));
 
 
-canvas.width = width;
-canvas.height = height;
+// canvas.width = squareSize;
+// canvas.height = squareSize;
 
 navigator.mediaDevices.getUserMedia(constraints)
     .then(function (stream) {
@@ -51,12 +53,12 @@ let src, cap;
 
 const model = tf.loadGraphModel('./model/model.json');
 
-setTimeout(function() {
+setTimeout(function () {
     src = new cv.Mat(height, width, cv.CV_8UC4);
     cap = new cv.VideoCapture("video");
-    window.setInterval(function(){
+    window.setInterval(function () {
         process();
-    },300);
+    }, 300);
 }, 5000);
 
 function process() {
@@ -96,11 +98,11 @@ function process() {
             let y1 = parseInt(xy_array[maxSup[i]][1]);
             let x2 = parseInt(xy_array[maxSup[i]][2]);
             let y2 = parseInt(xy_array[maxSup[i]][3]);
-            ctx.strokeStyle = 'red'; // 선 색
+            ctx.strokeStyle = 'green'; // 선 색
             ctx.lineWidth = 3; // px단위
             ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
             ctx.font = '25px serif';
-            ctx.fillStyle = "red";
+            ctx.fillStyle = "green";
             ctx.fillText(classes[cls[maxSup[i]]], x1, y1 - 10);
         }
     });

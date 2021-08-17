@@ -1,4 +1,4 @@
-html, body{
+html, body {
     /*background: #6bac66;*/
     height: 100%;
     width: 100%;
@@ -8,10 +8,15 @@ html, body{
 }
 
 #logo {
-    width: 100px;
+    width: 300px;
     height: auto;
 }
 
-#logo_container{
+#logo_container {
     margin: 50px auto;
+}
+
+#canvas_box {
+    display: flex;
+    justify-content: center;
 }

@@ -20,15 +20,15 @@
 
             // 접속한 디바이스 환경
             const this_device = navigator.platform;
+            const index_canvas = document.getElementById('output');
 
-            if ( this_device ) {
-                if ( pc_device.indexOf(navigator.platform.toLowerCase()) < 0 ) {
+            if (this_device) {
+                if (pc_device.indexOf(navigator.platform.toLowerCase()) < 0) {
                     console.log('MOBILE');
-
-                    const index_canvas = document.getElementById('output');
                     index_canvas.style.width = '100%'
                 } else {
                     console.log('PC');
+                    index_canvas.style.width = '640px'
                 }
 
             }
@@ -37,9 +37,10 @@
 </head>
 
 <body onload="setSize(); device_check();">
-<div id="logo_container" style="display: none">
+<div id="logo_container" style="display: none; text-align: center">
     <img id="logo" src="./src/img/logo_oss.gif" alt="">
 </div>
+
 <div id="del_container">
     <div id="loading-container">
         <div class="loading"></div>
@@ -47,10 +48,11 @@
     </div>
     <p id="link">Please wait for 5 seconds.</p>
 </div>
-<canvas id="output"></canvas>
-<video id="video" style="display: none;"></video>
+<div id="canvas_box">
+    <canvas id="output"></canvas>
+    <video id="video" style="display: none;"></video>
+</div>
 </body>
-
 <script src="https://docs.opencv.org/3.4/opencv.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
 <script src="./tensor/video.js"></script>
@@ -60,7 +62,7 @@
         const logo = document.getElementById('logo_container');
 
         container.remove();
-        logo.style.display = 'inline-block'
+        logo.style.display = 'block'
     }, 5000);
 </script>
 </html>
