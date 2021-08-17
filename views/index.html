@@ -1,35 +1,23 @@
-<!doctype html>
-<html lang="en">
+<meta http-equiv="Expires" content=0>
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+
+<!DOCTYPE html>
+<html>
+
 <head>
     <title>YCSI</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <META HTTP-EQUIV='Pragma' CONTENT='no-cache'>
-    <META http-equiv="Expires" content="-1">
-    <link rel="stylesheet" href="src/css/main.css">
-
+    <!--css-->
+    <link rel="stylesheet" href="./src/css/main.css">
 </head>
+<script src="https://docs.opencv.org/3.4/opencv.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
+<!--script async src="./opencv.js"></script-->
 
-<script async src="https://docs.opencv.org/3.4/opencv.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
-
-<body onload="setSize()">
-<div>
-    <button id="toggleStream" onclick="toggleStream()">Play</button>
-    <button id="cvtGray" onclick="cvtGray()" style="visibility: hidden;">Convert to Gray</button>
-</div>
-<h2>식별된 캔</h2>
-<p id="identified">식별된 캔이 없습니다.</p>
-<br>
-<br>
-<video id="video"></video>
-<br>
-<canvas id='output'></canvas>
-
+<body onload="setSize();">
+<canvas id="output"></canvas>
+<video id="video" style="display: none;"></video>
 </body>
-<script src="tensor/video.js"></script>
+<script src="./tensor/video.js"></script>
 </html>
