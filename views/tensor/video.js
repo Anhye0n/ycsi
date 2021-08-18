@@ -18,26 +18,30 @@ const ctx = canvas.getContext('2d');
 //const xy_cal = tf.tensor2d([320, 0, 320, 0, 0, 320, 0, 320, -160, 0, 160, 0, 0, -160, 0, 160], [4, 4]);
 const xy_cal = tf.tensor2d([1, 0, 1, 0, 0, 1, 0, 1, -0.5, 0, 0.5, 0, 0, -0.5, 0, 0.5], [4, 4]).mul(tf.scalar(squareSize));
 
-const pc_device = "win16|win32|win64|mac|macintel";
+let squareSize
 
-// 접속한 디바이스 환경
-const this_device = navigator.platform;
+function device_checks() {
+    // 디바이스 종류 설정
+    const pc_device = "win16|win32|win64|mac|macintel";
 
-if (this_device) {
-    if (pc_device.indexOf(navigator.platform.toLowerCase()) < 0) {
-        console.log('MOBILE');
-        // alert(index_canvas.style.width)
-        squareSize = screen.availWidth;
-        alert(screen.availWidth)
-    } else {
-        console.log('PC');
-        squareSize = 640;
+    // 접속한 디바이스 환경
+    const this_device = navigator.platform;
+
+    if (this_device) {
+        if (pc_device.indexOf(navigator.platform.toLowerCase()) < 0) {
+            console.log('MOBILE');
+            squareSize = screen.availWidth
+            alert(squareSize)
+        } else {
+            console.log('PC');
+            squareSize = 640
+        }
     }
 }
 
-inputSize = 320;
-outputSize = 6300;
-clses = 2;
+let inputSize = 320;
+let outputSize = 6300;
+let clses = 2;
 
 
 let classes = {
