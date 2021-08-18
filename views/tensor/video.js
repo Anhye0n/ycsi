@@ -14,12 +14,18 @@ function setSize() {
 const video = document.getElementById("video");
 const canvas = document.getElementById("output");
 
-squareSize = 640;
-inputSize = 320;
-outputSize = 6300;
-clses = 2;
+let squareSize
+let inputSize = 320;
+let outputSize = 6300;
+let clses = 2;
 
-alert(screen.availWidth)
+if (screen.availWidth >= 640){
+    squareSize = 640;
+} else{
+    squareSize = screen.availWidth;
+}
+
+alert(squareSize)
 
 let classes = {
     '0': 'Chilseong',
