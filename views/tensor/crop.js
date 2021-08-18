@@ -1,16 +1,116 @@
-const test_img = document.getElementById("crop_test");
-const test_canvas = document.getElementById('crop_canvas');
+let width, height;
 
-const test_ctx = test_canvas.getContext('2d');
+function setSize() {
+    if (window.orientation == 0) {
+        //portrait
+        width = 642;
+        height = 856;
+    } else {
+        //landscape
+        width = 856;
+        height = 642;
+    }
+}
 
-test_canvas.width = 500;
-test_canvas.height = 500;
+squareSize = 640;
+inputSize = 320;
+outputSize = 6300;
+clses = 2;
 
-function draw() {
-    test_img.style.visibility = "visible";
+let classes = {
+    '0': 'Chilseong',
+    '1': 'Sprite'
+}
 
-    let test_img_width = test_img.clientWidth
-    let test_img_heigth = test_img.clientHeight
+const constraints = {
+    video: {facingMode: "environment"}, audio: false
+};
 
-    test_ctx.drawImage(test_img, test_img_width/2 - 250,test_img_heigth/2 - 250,500,500,0,0,500,500)
+const video = document.getElementById("video");
+const canvas = document.getElementById("output");
+const ctx = canvas.getContext('2d');
+//const xy_cal = tf.tensor2d([320, 0, 320, 0, 0, 320, 0, 320, -160, 0, 160, 0, 0, -160, 0, 160], [4, 4]);
+const xy_cal = tf.tensor2d([1, 0, 1, 0, 0, 1, 0, 1, -0.5, 0, 0.5, 0, 0, -0.5, 0, 0.5], [4, 4]).mul(tf.scalar(squareSize));
+
+
+/*canvas.width = width;
+canvas.height = height;*/
+
+navigator.mediaDevices.getUserMedia(constraints)
+    .then(function (stream) {
+        video.width = width;
+        video.height = height;
+        video.srcObject = stream;
+        video.play();
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+let src, cap;
+
+const model = tf.loadGraphModel('./model/model.json');
+
+setTimeout(function() {
+    src = new cv.Mat(height, width, cv.CV_8UC4);
+    cap = new cv.VideoCapture("video");
+    window.setInterval(function(){
+        process();
+    },300);
+}, 5000);
+
+function process() {
+    cap.read(src);
+    let rect = new cv.Rect(video.width / 2 - squareSize / 2, video.height / 2 - squareSize / 2, squareSize, squareSize);
+    let out_dst = src.roi(rect);
+    let dst = new cv.Mat();
+    let dsize = new cv.Size(inputSize, inputSize);
+    cv.resize(out_dst, dst, dsize, 0, 0, cv.INTER_AREA);
+    let tmp = new cv.Mat();
+    cv.cvtColor(dst, tmp, cv.COLOR_RGBA2RGB);
+    model.then(function (res) {
+        tf.engine().startScope();
+        let dst_tensor = tf.tensor(tmp.data, [inputSize, inputSize, 3]);
+        dst_tensor = dst_tensor.expandDims(0);
+        dst_tensor = dst_tensor.div(tf.scalar(255));
+        let pred = res.predict(dst_tensor).reshape([outputSize, 7]);
+        let box = pred.slice([0, 0], [outputSize, 4]);
+        let score = pred.slice([0, 4], [outputSize, 1]).reshape([outputSize]);
+        let cls = pred.slice([0, 5], [outputSize, clses]);
+        cls = cls.argMax(1);
+        box = box.matMul(xy_cal);
+        let maxSup = tf.image.nonMaxSuppression(box, score, maxOutputSize = 1000, iouThreshold = 0.5, scoreThreshold = 0.25);
+        let box_array = box.dataSync();
+        box_array = Array.from(box_array);
+        let cls_array = cls.dataSync();
+        cls_array = Array.from(cls_array);
+        xy_array = [];
+        for (var i = 0; i < box_array.length; i += 4) {
+            xy_array.push([box_array[i], box_array[i + 1], box_array[i + 2], box_array[i + 3]]);
+        }
+        maxSup = maxSup.dataSync();
+        maxSup = Array.from(maxSup);
+        cv.imshow('output', out_dst);
+        for (i = 0; i < maxSup.length; i++) {
+            let x1 = parseInt(xy_array[maxSup[i]][0]);
+            let y1 = parseInt(xy_array[maxSup[i]][1]);
+            let x2 = parseInt(xy_array[maxSup[i]][2]);
+            let y2 = parseInt(xy_array[maxSup[i]][3]);
+            ctx.strokeStyle = 'red'; // 선 색
+            ctx.lineWidth = 3; // px단위
+            ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+            ctx.font = '25px serif';
+            ctx.fillStyle = "red";
+            ctx.fillText(classes[cls_array[maxSup[i]]], x1, y1 - 10);
+        }
+        out_dst.delete();
+        dst.delete();
+        tmp.delete();
+        tf.engine().endScope();
+        //tf.dispose(dst_tensor);
+        //tf.dispose(pred);
+        //tf.dispose(box);
+        //tf.dispose(score);
+        //tf.dispose(cls);
+    });
 }

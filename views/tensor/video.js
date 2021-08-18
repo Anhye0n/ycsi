@@ -15,12 +15,30 @@ function setSize() {
 const video = document.getElementById("video");
 const canvas = document.getElementById("output");
 const ctx = canvas.getContext('2d');
+//const xy_cal = tf.tensor2d([320, 0, 320, 0, 0, 320, 0, 320, -160, 0, 160, 0, 0, -160, 0, 160], [4, 4]);
+const xy_cal = tf.tensor2d([1, 0, 1, 0, 0, 1, 0, 1, -0.5, 0, 0.5, 0, 0, -0.5, 0, 0.5], [4, 4]).mul(tf.scalar(squareSize));
 
-// alert('Mobile Width : ' + canvas_width);
-// let squareSize = canvas.clientWidth;
-let squareSize = 600;
+const pc_device = "win16|win32|win64|mac|macintel";
 
-// alert(squareSize)
+// 접속한 디바이스 환경
+const this_device = navigator.platform;
+
+if (this_device) {
+    if (pc_device.indexOf(navigator.platform.toLowerCase()) < 0) {
+        console.log('MOBILE');
+        // alert(index_canvas.style.width)
+        squareSize = screen.availWidth;
+        alert(screen.availWidth)
+    } else {
+        console.log('PC');
+        squareSize = 640;
+    }
+}
+
+inputSize = 320;
+outputSize = 6300;
+clses = 2;
+
 
 let classes = {
     '0': 'Chilseong',
@@ -31,12 +49,8 @@ const constraints = {
     video: {facingMode: "environment",}, audio: false
 };
 
-//const xy_cal = tf.tensor2d([320, 0, 320, 0, 0, 320, 0, 320, -160, 0, 160, 0, 0, -160, 0, 160], [4, 4]);
-const xy_cal = tf.tensor2d([1, 0, 1, 0, 0, 1, 0, 1, -0.5, 0, 0.5, 0, 0, -0.5, 0, 0.5], [4, 4]).mul(tf.scalar(squareSize));
-
-
-// canvas.width = squareSize;
-// canvas.height = squareSize;
+/*canvas.width = width;
+canvas.height = height;*/
 
 navigator.mediaDevices.getUserMedia(constraints)
     .then(function (stream) {
@@ -53,12 +67,12 @@ let src, cap;
 
 const model = tf.loadGraphModel('./model/model.json');
 
-setTimeout(function () {
+setTimeout(function() {
     src = new cv.Mat(height, width, cv.CV_8UC4);
     cap = new cv.VideoCapture("video");
-    window.setInterval(function () {
+    window.setInterval(function(){
         process();
-    }, 300);
+    },300);
 }, 5000);
 
 function process() {
@@ -66,29 +80,29 @@ function process() {
     let rect = new cv.Rect(video.width / 2 - squareSize / 2, video.height / 2 - squareSize / 2, squareSize, squareSize);
     let out_dst = src.roi(rect);
     let dst = new cv.Mat();
-    let dsize = new cv.Size(320, 320);
+    let dsize = new cv.Size(inputSize, inputSize);
     cv.resize(out_dst, dst, dsize, 0, 0, cv.INTER_AREA);
-    let test = new cv.Mat();
-    cv.cvtColor(dst, test, cv.COLOR_RGBA2RGB);
-    test = tf.tensor(test.data, [320, 320, 3]);
-    let dst_tensor = test;
-    dst_tensor = dst_tensor.expandDims(0);
-    dst_tensor = dst_tensor.div(tf.scalar(255));
+    let tmp = new cv.Mat();
+    cv.cvtColor(dst, tmp, cv.COLOR_RGBA2RGB);
     model.then(function (res) {
-        let pred = res.predict(dst_tensor).reshape([6300, 7]);
-        let box = pred.slice([0, 0], [6300, 4]);
-        let score = pred.slice([0, 4], [6300, 1]).reshape([6300]);
-        let cls = pred.slice([0, 5], [6300, 2]);
+        tf.engine().startScope();
+        let dst_tensor = tf.tensor(tmp.data, [inputSize, inputSize, 3]);
+        dst_tensor = dst_tensor.expandDims(0);
+        dst_tensor = dst_tensor.div(tf.scalar(255));
+        let pred = res.predict(dst_tensor).reshape([outputSize, 7]);
+        let box = pred.slice([0, 0], [outputSize, 4]);
+        let score = pred.slice([0, 4], [outputSize, 1]).reshape([outputSize]);
+        let cls = pred.slice([0, 5], [outputSize, clses]);
         cls = cls.argMax(1);
         box = box.matMul(xy_cal);
         let maxSup = tf.image.nonMaxSuppression(box, score, maxOutputSize = 1000, iouThreshold = 0.5, scoreThreshold = 0.25);
-        box = box.dataSync();
-        box = Array.from(box);
-        cls = cls.dataSync();
-        cls = Array.from(cls);
+        let box_array = box.dataSync();
+        box_array = Array.from(box_array);
+        let cls_array = cls.dataSync();
+        cls_array = Array.from(cls_array);
         xy_array = [];
-        for (var i = 0; i < box.length; i += 4) {
-            xy_array.push([box[i], box[i + 1], box[i + 2], box[i + 3]]);
+        for (var i = 0; i < box_array.length; i += 4) {
+            xy_array.push([box_array[i], box_array[i + 1], box_array[i + 2], box_array[i + 3]]);
         }
         maxSup = maxSup.dataSync();
         maxSup = Array.from(maxSup);
@@ -103,7 +117,16 @@ function process() {
             ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
             ctx.font = '25px serif';
             ctx.fillStyle = "red";
-            ctx.fillText(classes[cls[maxSup[i]]], x1, y1 - 10);
+            ctx.fillText(classes[cls_array[maxSup[i]]], x1, y1 - 10);
         }
+        out_dst.delete();
+        dst.delete();
+        tmp.delete();
+        tf.engine().endScope();
+        //tf.dispose(dst_tensor);
+        //tf.dispose(pred);
+        //tf.dispose(box);
+        //tf.dispose(score);
+        //tf.dispose(cls);
     });
 }
