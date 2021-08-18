@@ -1,1 +1,128 @@
-function _0x1cfe(){const _0x3e3176=['fillStyle','cvtColor','reshape','nonMaxSuppression','tensor','Mat','height','./model/model.json','COLOR_RGBA2RGB','then','play','3723360yNtgab','219yIIjjD','engine','div','21350360DFzCRN','16135XNIStk','slice','push','fillText','Sprite','getContext','loadGraphModel','2943306geoHOi','CV_8UC4','scalar','5PSvYMY','strokeStyle','length','from','6914184hXkWdy','font','startScope','1019455tFFhuJ','getUserMedia','25px\x20serif','28746mnBIDY','setInterval','read','image','output','imshow','catch','Chilseong','Size','mediaDevices','video','dataSync','getElementById','delete','red','expandDims','tensor2d','544dIZvCp','roi','availWidth','width'];_0x1cfe=function(){return _0x3e3176;};return _0x1cfe();}const _0x438dac=_0x43d1;(function(_0x4fe539,_0x148495){const _0x43c9be=_0x43d1,_0x2d0f0f=_0x4fe539();while(!![]){try{const _0x5055cb=parseInt(_0x43c9be(0x120))/0x1+-parseInt(_0x43c9be(0x123))/0x2*(-parseInt(_0x43c9be(0x10b))/0x3)+-parseInt(_0x43c9be(0x10a))/0x4+-parseInt(_0x43c9be(0x119))/0x5*(-parseInt(_0x43c9be(0x11d))/0x6)+-parseInt(_0x43c9be(0x10f))/0x7*(-parseInt(_0x43c9be(0x134))/0x8)+parseInt(_0x43c9be(0x116))/0x9+-parseInt(_0x43c9be(0x10e))/0xa;if(_0x5055cb===_0x148495)break;else _0x2d0f0f['push'](_0x2d0f0f['shift']());}catch(_0x9cada6){_0x2d0f0f['push'](_0x2d0f0f['shift']());}}}(_0x1cfe,0x9bfe2));let width,height;function setSize(){window['orientation']==0x0?(width=0x282,height=0x358):(width=0x358,height=0x282);}function _0x43d1(_0x133915,_0x2b1aca){const _0x1cfebe=_0x1cfe();return _0x43d1=function(_0x43d18e,_0x52d05a){_0x43d18e=_0x43d18e-0x105;let _0x2f5693=_0x1cfebe[_0x43d18e];return _0x2f5693;},_0x43d1(_0x133915,_0x2b1aca);}const video=document[_0x438dac(0x12f)](_0x438dac(0x12d)),canvas=document[_0x438dac(0x12f)](_0x438dac(0x127));let squareSize,inputSize=0x140,outputSize=0x189c,clses=0x2;screen['availWidth']>=0x280?squareSize=0x280:squareSize=screen[_0x438dac(0x136)];let classes={'0':_0x438dac(0x12a),'1':_0x438dac(0x113)};const constraints={'video':{'facingMode':'environment'},'audio':![]},ctx=canvas[_0x438dac(0x114)]('2d'),xy_cal=tf[_0x438dac(0x133)]([0x1,0x0,0x1,0x0,0x0,0x1,0x0,0x1,-0.5,0x0,0.5,0x0,0x0,-0.5,0x0,0.5],[0x4,0x4])['mul'](tf[_0x438dac(0x118)](squareSize));navigator[_0x438dac(0x12c)][_0x438dac(0x121)](constraints)['then'](function(_0x588609){const _0x507d05=_0x438dac;video[_0x507d05(0x137)]=width,video[_0x507d05(0x105)]=height,video['srcObject']=_0x588609,video[_0x507d05(0x109)]();})[_0x438dac(0x129)](function(_0x38bc84){console['log'](_0x38bc84);});let src,cap;const model=tf[_0x438dac(0x115)](_0x438dac(0x106));setTimeout(function(){const _0x5e5e09=_0x438dac;src=new cv['Mat'](height,width,cv[_0x5e5e09(0x117)]),cap=new cv['VideoCapture'](_0x5e5e09(0x12d)),window[_0x5e5e09(0x124)](function(){process();},0x12c);},0x1388);function process(){const _0x52bed9=_0x438dac;cap[_0x52bed9(0x125)](src);let _0x220cf0=new cv['Rect'](video['width']/0x2-squareSize/0x2,video[_0x52bed9(0x105)]/0x2-squareSize/0x2,squareSize,squareSize),_0x7efb50=src[_0x52bed9(0x135)](_0x220cf0),_0x3526cd=new cv[(_0x52bed9(0x13d))](),_0x5958ad=new cv[(_0x52bed9(0x12b))](inputSize,inputSize);cv['resize'](_0x7efb50,_0x3526cd,_0x5958ad,0x0,0x0,cv['INTER_AREA']);let _0x581d6d=new cv[(_0x52bed9(0x13d))]();cv[_0x52bed9(0x139)](_0x3526cd,_0x581d6d,cv[_0x52bed9(0x107)]),model[_0x52bed9(0x108)](function(_0x3de277){const _0x1796d2=_0x52bed9;tf[_0x1796d2(0x10c)]()[_0x1796d2(0x11f)]();let _0x3cfdb7=tf[_0x1796d2(0x13c)](_0x581d6d['data'],[inputSize,inputSize,0x3]);_0x3cfdb7=_0x3cfdb7[_0x1796d2(0x132)](0x0),_0x3cfdb7=_0x3cfdb7[_0x1796d2(0x10d)](tf[_0x1796d2(0x118)](0xff));let _0x1d9f2f=_0x3de277['predict'](_0x3cfdb7)[_0x1796d2(0x13a)]([outputSize,0x7]),_0x2b6cbf=_0x1d9f2f[_0x1796d2(0x110)]([0x0,0x0],[outputSize,0x4]),_0x5ebd0f=_0x1d9f2f['slice']([0x0,0x4],[outputSize,0x1])['reshape']([outputSize]),_0x3bca43=_0x1d9f2f[_0x1796d2(0x110)]([0x0,0x5],[outputSize,clses]);_0x3bca43=_0x3bca43['argMax'](0x1),_0x2b6cbf=_0x2b6cbf['matMul'](xy_cal);let _0x2a9398=tf[_0x1796d2(0x126)][_0x1796d2(0x13b)](_0x2b6cbf,_0x5ebd0f,maxOutputSize=0x3e8,iouThreshold=0.5,scoreThreshold=0.25),_0x1cca2f=_0x2b6cbf[_0x1796d2(0x12e)]();_0x1cca2f=Array[_0x1796d2(0x11c)](_0x1cca2f);let _0x55bd76=_0x3bca43[_0x1796d2(0x12e)]();_0x55bd76=Array[_0x1796d2(0x11c)](_0x55bd76),xy_array=[];for(var _0x4f0610=0x0;_0x4f0610<_0x1cca2f[_0x1796d2(0x11b)];_0x4f0610+=0x4){xy_array[_0x1796d2(0x111)]([_0x1cca2f[_0x4f0610],_0x1cca2f[_0x4f0610+0x1],_0x1cca2f[_0x4f0610+0x2],_0x1cca2f[_0x4f0610+0x3]]);}_0x2a9398=_0x2a9398['dataSync'](),_0x2a9398=Array[_0x1796d2(0x11c)](_0x2a9398),cv[_0x1796d2(0x128)](_0x1796d2(0x127),_0x7efb50);for(_0x4f0610=0x0;_0x4f0610<_0x2a9398[_0x1796d2(0x11b)];_0x4f0610++){let _0x225ab9=parseInt(xy_array[_0x2a9398[_0x4f0610]][0x0]),_0x481073=parseInt(xy_array[_0x2a9398[_0x4f0610]][0x1]),_0x1cfd19=parseInt(xy_array[_0x2a9398[_0x4f0610]][0x2]),_0x5a8527=parseInt(xy_array[_0x2a9398[_0x4f0610]][0x3]);ctx[_0x1796d2(0x11a)]=_0x1796d2(0x131),ctx['lineWidth']=0x3,ctx['strokeRect'](_0x225ab9,_0x481073,_0x1cfd19-_0x225ab9,_0x5a8527-_0x481073),ctx[_0x1796d2(0x11e)]=_0x1796d2(0x122),ctx[_0x1796d2(0x138)]=_0x1796d2(0x131),ctx[_0x1796d2(0x112)](classes[_0x55bd76[_0x2a9398[_0x4f0610]]],_0x225ab9,_0x481073-0xa);}_0x7efb50['delete'](),_0x3526cd[_0x1796d2(0x130)](),_0x581d6d[_0x1796d2(0x130)](),tf['engine']()['endScope']();});}
+let width, height;
+
+function setSize() {
+    if (window.orientation == 0) {
+        //portrait
+        width = 642;
+        height = 856;
+    } else {
+        //landscape
+        width = 856;
+        height = 642;
+    }
+}
+const video = document.getElementById("video");
+const canvas = document.getElementById("output");
+
+let squareSize
+let inputSize = 320;
+let outputSize = 6300;
+let clses = 4;
+
+if (screen.availWidth >= 640){
+    squareSize = 640;
+} else{
+    squareSize = screen.availWidth;
+}
+
+// alert(squareSize)
+
+let classes = {
+    '0': 'Chilsung',
+    '1': 'Coca-Cola',
+    '2': 'Pepsi',
+    '3': 'Sprite'
+}
+
+const constraints = {
+    video: {facingMode: "environment"}, audio: false
+};
+
+const ctx = canvas.getContext('2d');
+//const xy_cal = tf.tensor2d([320, 0, 320, 0, 0, 320, 0, 320, -160, 0, 160, 0, 0, -160, 0, 160], [4, 4]);
+const xy_cal = tf.tensor2d([1, 0, 1, 0, 0, 1, 0, 1, -0.5, 0, 0.5, 0, 0, -0.5, 0, 0.5], [4, 4]).mul(tf.scalar(squareSize));
+
+
+/*canvas.width = width;
+canvas.height = height;*/
+
+navigator.mediaDevices.getUserMedia(constraints)
+    .then(function (stream) {
+        video.width = width;
+        video.height = height;
+        video.srcObject = stream;
+        video.play();
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+let src, cap;
+
+const model = tf.loadGraphModel('./model/model.json');
+
+setTimeout(function() {
+    src = new cv.Mat(height, width, cv.CV_8UC4);
+    cap = new cv.VideoCapture("video");
+    window.setInterval(function(){
+        process();
+    },300);
+}, 5000);
+
+let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
+
+function process() {
+    cap.read(src);
+    let rect = new cv.Rect(video.width / 2 - squareSize / 2, video.height / 2 - squareSize / 2, squareSize, squareSize);
+    let out_dst = src.roi(rect);
+    let dst = new cv.Mat();
+    let dsize = new cv.Size(inputSize, inputSize);
+    cv.resize(out_dst, dst, dsize, 0, 0, cv.INTER_AREA);
+    let tmp = new cv.Mat();
+    cv.cvtColor(dst, tmp, cv.COLOR_RGBA2RGB);
+    model.then(function (res) {
+        tf.engine().startScope();
+        let dst_tensor = tf.tensor(tmp.data, [inputSize, inputSize, 3]);
+        dst_tensor = dst_tensor.expandDims(0);
+        dst_tensor = dst_tensor.div(tf.scalar(255));
+        let pred = res.predict(dst_tensor).reshape([outputSize, 5+clses]);
+        let box = pred.slice([0, 0], [outputSize, 4]);
+        let score = pred.slice([0, 4], [outputSize, 1]).reshape([outputSize]);
+        let cls = pred.slice([0, 5], [outputSize, clses]);
+        cls = cls.argMax(1);
+        box = box.matMul(xy_cal);
+        let maxSup = tf.image.nonMaxSuppression(box, score, maxOutputSize = 1000, iouThreshold = 0.5, scoreThreshold = 0.25);
+        let box_array = box.dataSync();
+        box_array = Array.from(box_array);
+        let cls_array = cls.dataSync();
+        cls_array = Array.from(cls_array);
+        xy_array = [];
+        for (var i = 0; i < box_array.length; i += 4) {
+            xy_array.push([box_array[i], box_array[i + 1], box_array[i + 2], box_array[i + 3]]);
+        }
+        maxSup = maxSup.dataSync();
+        maxSup = Array.from(maxSup);
+        cv.imshow('output', out_dst);
+        for (i = 0; i < maxSup.length; i++) {
+            let x1 = parseInt(xy_array[maxSup[i]][0]);
+            let y1 = parseInt(xy_array[maxSup[i]][1]);
+            let x2 = parseInt(xy_array[maxSup[i]][2]);
+            let y2 = parseInt(xy_array[maxSup[i]][3]);
+            ctx.strokeStyle = RandomColor; // 선 색
+            ctx.lineWidth = 3; // px단위
+            ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+            ctx.font = '25px serif';
+            ctx.fillStyle = RandomColor;
+            ctx.fillText(classes[cls_array[maxSup[i]]], x1, y1 - 10);
+        }
+        out_dst.delete();
+        dst.delete();
+        tmp.delete();
+        tf.engine().endScope();
+        //tf.dispose(dst_tensor);
+        //tf.dispose(pred);
+        //tf.dispose(box);
+        //tf.dispose(score);
+        //tf.dispose(cls);
+    });
+}
