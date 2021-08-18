@@ -24,9 +24,13 @@
 
             if (this_device) {
                 if (pc_device.indexOf(navigator.platform.toLowerCase()) < 0) {
-                    index_canvas.style.width = screen.availWidth + 'px'
+                    // index_canvas.style.width = screen.availWidth + 'px'
+                    // 수정
+                    index_canvas.style.width = '320px'
                 } else {
-                    index_canvas.style.width = '640px'
+                    // index_canvas.style.width = '640px'
+                    // 수정
+                    index_canvas.style.width = '320px'
                 }
             }
         }

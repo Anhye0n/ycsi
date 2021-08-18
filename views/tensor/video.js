@@ -20,9 +20,13 @@ let outputSize = 6300;
 let clses = 4;
 
 if (screen.availWidth >= 640){
-    squareSize = 640;
+    // squareSize = 640;
+    // 수정
+    squareSize = 320;
 } else{
-    squareSize = screen.availWidth;
+    // squareSize = screen.availWidth;
+    // 수정
+    squareSize = 320;
 }
 
 // alert(squareSize)
