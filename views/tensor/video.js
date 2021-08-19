@@ -17,7 +17,7 @@ const canvas = document.getElementById("output");
 let squareSize
 let inputSize = 320;
 let outputSize = 6300;
-let clses = 4;
+let clses = 6;
 
 if (screen.availWidth >= 640){
     squareSize = 640;
@@ -34,8 +34,10 @@ if (screen.availWidth >= 640){
 let classes = {
     '0': 'Chilsung',
     '1': 'Coca-Cola',
-    '2': 'Pepsi',
-    '3': 'Sprite'
+    '2': 'Coca-Zero',
+    '3': 'Pepsi',
+    '4': 'PocariSweat',
+    '5': 'Sprite'
 }
 
 const constraints = {
