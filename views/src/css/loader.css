@@ -8,8 +8,13 @@
     top: 43%;
 }
 
-#link:hover {
-    color: #000000
+#link_imogi{
+    color: #000000;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    top: 43%;
 }
 
 #link, #link:hover {
