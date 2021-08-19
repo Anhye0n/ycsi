@@ -75,7 +75,7 @@ setTimeout(function() {
     },300);
 }, 5000);
 
-let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
+// let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
 function process() {
     cap.read(src);
@@ -114,11 +114,11 @@ function process() {
             let y1 = parseInt(xy_array[maxSup[i]][1]);
             let x2 = parseInt(xy_array[maxSup[i]][2]);
             let y2 = parseInt(xy_array[maxSup[i]][3]);
-            ctx.strokeStyle = RandomColor; // 선 색
+            ctx.strokeStyle = 'red'; // 선 색
             ctx.lineWidth = 3; // px단위
             ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
-            ctx.font = '25px serif';
-            ctx.fillStyle = RandomColor;
+            ctx.font = "25px Noto Serif KR";
+            ctx.fillStyle = 'red';
             ctx.fillText(classes[cls_array[maxSup[i]]], x1, y1 - 10);
         }
         out_dst.delete();
