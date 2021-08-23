@@ -74,7 +74,7 @@ let model = tf.loadGraphModel('indexeddb://my-model').then(function(){
 
         container.remove();
         logo.style.display = 'flex'
-    }, 1000);
+    }, 1500);
 
     setTimeout(function() {
         src = new cv.Mat(height, width, cv.CV_8UC4);
@@ -85,7 +85,7 @@ let model = tf.loadGraphModel('indexeddb://my-model').then(function(){
                 process();
             }
         },100);
-    }, 500);
+    }, 1000);
 }).catch(function(err){
     (model = tf.loadGraphModel('./model/model.json')).then(function(){
         model.then(function (res) {
