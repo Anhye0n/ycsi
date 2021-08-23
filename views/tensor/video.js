@@ -1,4 +1,3 @@
-
 let width, height;
 
 function setSize() {
@@ -12,6 +11,7 @@ function setSize() {
         height = 642;
     }
 }
+
 const video = document.getElementById("video");
 const canvas = document.getElementById("output");
 
@@ -20,11 +20,11 @@ let inputSize = 320;
 let outputSize = 6300;
 let clses = 6;
 
-if (screen.availWidth >= 640){
+if (screen.availWidth >= 640) {
     squareSize = 640;
     // 수정
     // squareSize = 320;
-} else{
+} else {
     squareSize = screen.availWidth;
     // 수정
     // squareSize = 320;
@@ -67,8 +67,8 @@ navigator.mediaDevices.getUserMedia(constraints)
 let src, cap;
 let flag = true;
 
-let model = tf.loadGraphModel('indexeddb://my-model').catch(function(err){
-    (model = tf.loadGraphModel('./model/model.json')).then(function(){
+let model = tf.loadGraphModel('indexeddb://my-model').catch(function (err) {
+    (model = tf.loadGraphModel('./model/model.json')).then(function () {
         model.then(function (res) {
             res.save('indexeddb://my-model');
         });
@@ -85,6 +85,18 @@ setTimeout(function() {
         }
     },100);
 }, 4000);
+/*
+function OpenInterval() {
+    src = new cv.Mat(height, width, cv.CV_8UC4);
+    cap = new cv.VideoCapture("video");
+    window.setInterval(function () {
+        if (flag == true) {
+            flag = false;
+            process();
+        }
+    }, 100);
+}
+*/
 
 // let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
@@ -102,7 +114,7 @@ function process() {
         let dst_tensor = tf.tensor(tmp.data, [inputSize, inputSize, 3]);
         dst_tensor = dst_tensor.expandDims(0);
         dst_tensor = dst_tensor.div(tf.scalar(255));
-        let pred = res.predict(dst_tensor).reshape([outputSize, 5+clses]);
+        let pred = res.predict(dst_tensor).reshape([outputSize, 5 + clses]);
         let box = pred.slice([0, 0], [outputSize, 4]);
         let score = pred.slice([0, 4], [outputSize, 1]).reshape([outputSize]);
         let cls = pred.slice([0, 5], [outputSize, clses]);
