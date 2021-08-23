@@ -32,14 +32,19 @@ if (screen.availWidth >= 640){
 // alert(squareSize)
 
 let classes = {
-    '0': 'Chilsung',
+    '0': '칠성사이다',
+    '1': '코카콜라',
+    '2': '코카콜라제로',
+    '3': '펩시',
+    '4': '포카리스웨트',
+    '5': '스프라이트'
+}
+/*'0': 'Chilsung',
     '1': 'Coca-Cola',
     '2': 'Coca-Zero',
     '3': 'Pepsi',
     '4': 'PocariSweat',
-    '5': 'Sprite'
-}
-
+    '5': 'Sprite'*/
 const constraints = {
     video: {facingMode: "environment"}, audio: false
 };
