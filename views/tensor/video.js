@@ -64,7 +64,15 @@ navigator.mediaDevices.getUserMedia(constraints)
     });
 
 let src, cap;
+let voices = [];
+let cls_cnt = [];
+let cnt = 0;
 let flag = true;
+
+for(let i = 0; i < clses; i++){
+    cls_cnt.push(0);
+}
+
 
 let model = tf.loadGraphModel('indexeddb://my-model').catch(function(err){
     (model = tf.loadGraphModel('./model/model.json')).then(function(){
@@ -73,6 +81,18 @@ let model = tf.loadGraphModel('indexeddb://my-model').catch(function(err){
         });
     });
 });
+const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]).reduce(compareFn)[1]
+const argMax = argFact((min, el) => (el[0] > min[0] ? el : min))
+
+function setVoiceList() {
+    voices = window.speechSynthesis.getVoices();
+}
+
+setVoiceList();
+
+if (window.speechSynthesis.onvoiceschanged !== undefined) {
+    window.speechSynthesis.onvoiceschanged = setVoiceList;
+}
 
 setTimeout(function() {
     src = new cv.Mat(height, width, cv.CV_8UC4);
@@ -113,7 +133,7 @@ function process() {
         let cls_array = cls.dataSync();
         cls_array = Array.from(cls_array);
         xy_array = [];
-        for (var i = 0; i < box_array.length; i += 4) {
+        for (let i = 0; i < box_array.length; i += 4) {
             xy_array.push([box_array[i], box_array[i + 1], box_array[i + 2], box_array[i + 3]]);
         }
         maxSup = maxSup.dataSync();
@@ -131,6 +151,19 @@ function process() {
             ctx.fillStyle = 'red';
             ctx.fillText(classes[cls_array[maxSup[i]]], x1, y1 - 10);
             console.log(cls_array[maxSup[i]])
+            max_size = (max_size < (x2 - x1) * (y2 - y1)) ? (x2 - x1) * (y2 - y1) : max_size;
+            max_num = (max_size < (x2 - x1) * (y2 - y1)) ? i : max_num;
+        }
+        if(maxSup.length !== 0){
+            cls_cnt[max_num] += 1;
+            cnt += 1;
+            if(cnt > 4){
+                speak(classes[argMax(cls_cnt)]);
+                cnt = 0;
+                for(let i = 0 ; i < cls_cnt.length; i++){
+                    cls_cnt[i] = 0;
+                }
+            }
         }
         out_dst.delete();
         dst.delete();
@@ -138,4 +171,24 @@ function process() {
         tf.engine().endScope();
     });
     flag = true;
+}
+function speak(txt) {
+    console.log(txt);
+    let lang = 'ko-KR';
+    let utterThis = new SpeechSynthesisUtterance(txt);
+    let voiceFound = false;
+    for (let i = 0; i < voices.length; i++) {
+        if (voices[i].lang.indexOf(lang) >= 0 || voices[i].lang.indexOf(lang.replace('-', '_')) >= 0) {
+            utterThis.voice = voices[i];
+            voiceFound = true;
+        }
+    }
+    if (!voiceFound) {
+        alert('voice not found');
+        return;
+    }
+    utterThis.lang = lang;
+    utterThis.pitch = 1;
+    utterThis.rate = 1;
+    window.speechSynthesis.speak(utterThis);
 }
