@@ -64,16 +64,30 @@ navigator.mediaDevices.getUserMedia(constraints)
     });
 
 let src, cap;
+let flag = true;
 
-const model = tf.loadGraphModel('./model/model.json');
+let model = tf.loadGraphModel('indexeddb://my-model').then(function(){
+    //캐시로 저장된거 대충 빨리 불러올 수 있음 여기에 빨리 불러올 경우 실행할 명령어 넣으면 됨
+}).catch(function(err){
+    (model = tf.loadGraphModel('./model/model.json')).then(function(){
+        model.then(function (res) {
+            res.save('indexeddb://my-model');
+            //캐시 없는경우 catch에 걸려서 모델 저장하게 됨
+        });
+        //늦게 불러올 경우 실행할 명령 여기다 넣으면 됩니다 ㅁㄴㅇㄹ
+    });
+});
 
 setTimeout(function() {
     src = new cv.Mat(height, width, cv.CV_8UC4);
     cap = new cv.VideoCapture("video");
     window.setInterval(function(){
-        process();
-    },300);
-}, 12000);
+        if(flag == true){
+            flag = false;
+            process();
+        }
+    },100);
+}, 6000);
 
 // let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
@@ -126,10 +140,6 @@ function process() {
         dst.delete();
         tmp.delete();
         tf.engine().endScope();
-        //tf.dispose(dst_tensor);
-        //tf.dispose(pred);
-        //tf.dispose(box);
-        //tf.dispose(score);
-        //tf.dispose(cls);
     });
+    flag = true;
 }
