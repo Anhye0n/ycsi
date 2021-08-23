@@ -1,1 +1,135 @@
-const _0x2447aa=_0x137c;(function(_0x1a871e,_0x130973){const _0x4bcfe8=_0x137c,_0x1304e7=_0x1a871e();while(!![]){try{const _0x35ba29=parseInt(_0x4bcfe8(0x159))/0x1+-parseInt(_0x4bcfe8(0x147))/0x2*(-parseInt(_0x4bcfe8(0x15f))/0x3)+-parseInt(_0x4bcfe8(0x13b))/0x4*(parseInt(_0x4bcfe8(0x151))/0x5)+parseInt(_0x4bcfe8(0x155))/0x6+-parseInt(_0x4bcfe8(0x14b))/0x7*(-parseInt(_0x4bcfe8(0x160))/0x8)+-parseInt(_0x4bcfe8(0x146))/0x9*(parseInt(_0x4bcfe8(0x15a))/0xa)+-parseInt(_0x4bcfe8(0x173))/0xb*(parseInt(_0x4bcfe8(0x168))/0xc);if(_0x35ba29===_0x130973)break;else _0x1304e7['push'](_0x1304e7['shift']());}catch(_0x59a02f){_0x1304e7['push'](_0x1304e7['shift']());}}}(_0x481f,0xb4bd7));let width,height;function setSize(){const _0x553a3b=_0x137c;window[_0x553a3b(0x136)]==0x0?(width=0x282,height=0x358):(width=0x358,height=0x282);}function _0x137c(_0x2e202e,_0x4aa725){const _0x481f29=_0x481f();return _0x137c=function(_0x137cd6,_0x1fb79a){_0x137cd6=_0x137cd6-0x135;let _0x55ae7a=_0x481f29[_0x137cd6];return _0x55ae7a;},_0x137c(_0x2e202e,_0x4aa725);}const video=document[_0x2447aa(0x16d)](_0x2447aa(0x14a)),canvas=document[_0x2447aa(0x16d)]('output');let squareSize,inputSize=0x140,outputSize=0x189c,clses=0x6;screen[_0x2447aa(0x169)]>=0x280?squareSize=0x280:squareSize=screen[_0x2447aa(0x169)];let classes={'0':_0x2447aa(0x164),'1':_0x2447aa(0x162),'2':_0x2447aa(0x172),'3':_0x2447aa(0x15d),'4':_0x2447aa(0x148),'5':_0x2447aa(0x170)};const constraints={'video':{'facingMode':_0x2447aa(0x137)},'audio':![]},ctx=canvas[_0x2447aa(0x156)]('2d'),xy_cal=tf[_0x2447aa(0x166)]([0x1,0x0,0x1,0x0,0x0,0x1,0x0,0x1,-0.5,0x0,0.5,0x0,0x0,-0.5,0x0,0.5],[0x4,0x4])['mul'](tf['scalar'](squareSize));navigator[_0x2447aa(0x149)][_0x2447aa(0x143)](constraints)[_0x2447aa(0x14f)](function(_0x55548a){const _0x591377=_0x2447aa;video[_0x591377(0x154)]=width,video[_0x591377(0x13f)]=height,video['srcObject']=_0x55548a,video[_0x591377(0x174)]();})[_0x2447aa(0x145)](function(_0x5e80ed){const _0x45b680=_0x2447aa;console[_0x45b680(0x139)](_0x5e80ed);});let src,cap;const model=tf[_0x2447aa(0x14c)](_0x2447aa(0x15c));function _0x481f(){const _0x1327a4=['Size','628352iMhbYN','10ZkhwXu','scalar','./model/model.json','Pepsi','length','44223FWlUzH','472gWlBpi','25px\x20Noto\x20Serif\x20KR','Coca-Cola','nonMaxSuppression','Chilsung','dataSync','tensor2d','slice','398928CheQaV','availWidth','read','argMax','from','getElementById','reshape','font','Sprite','image','Coca-Zero','374BEADRD','play','endScope','delete','INTER_AREA','orientation','environment','COLOR_RGBA2RGB','log','fillStyle','4LfZUPv','matMul','red','Mat','height','push','output','data','getUserMedia','cvtColor','catch','6294906bZMSAf','30HmYamb','PocariSweat','mediaDevices','video','153412KphiOg','loadGraphModel','engine','CV_8UC4','then','Rect','913625ExdxIw','startScope','fillText','width','3661530oMVSoi','getContext','setInterval'];_0x481f=function(){return _0x1327a4;};return _0x481f();}setTimeout(function(){const _0x14f029=_0x2447aa;src=new cv[(_0x14f029(0x13e))](height,width,cv[_0x14f029(0x14e)]),cap=new cv['VideoCapture'](_0x14f029(0x14a)),window[_0x14f029(0x157)](function(){process();},0x12c);},0x1388);function process(){const _0x296548=_0x2447aa;cap[_0x296548(0x16a)](src);let _0x5339c6=new cv[(_0x296548(0x150))](video[_0x296548(0x154)]/0x2-squareSize/0x2,video[_0x296548(0x13f)]/0x2-squareSize/0x2,squareSize,squareSize),_0x4ea6b8=src['roi'](_0x5339c6),_0x1e546d=new cv['Mat'](),_0x4c803b=new cv[(_0x296548(0x158))](inputSize,inputSize);cv['resize'](_0x4ea6b8,_0x1e546d,_0x4c803b,0x0,0x0,cv[_0x296548(0x135)]);let _0x5e15ef=new cv[(_0x296548(0x13e))]();cv[_0x296548(0x144)](_0x1e546d,_0x5e15ef,cv[_0x296548(0x138)]),model[_0x296548(0x14f)](function(_0x1b37b1){const _0x3d6b67=_0x296548;tf[_0x3d6b67(0x14d)]()[_0x3d6b67(0x152)]();let _0xc057b5=tf['tensor'](_0x5e15ef[_0x3d6b67(0x142)],[inputSize,inputSize,0x3]);_0xc057b5=_0xc057b5['expandDims'](0x0),_0xc057b5=_0xc057b5['div'](tf[_0x3d6b67(0x15b)](0xff));let _0x44ef9b=_0x1b37b1['predict'](_0xc057b5)['reshape']([outputSize,0x5+clses]),_0x925938=_0x44ef9b[_0x3d6b67(0x167)]([0x0,0x0],[outputSize,0x4]),_0x37ce74=_0x44ef9b[_0x3d6b67(0x167)]([0x0,0x4],[outputSize,0x1])[_0x3d6b67(0x16e)]([outputSize]),_0x561cb2=_0x44ef9b['slice']([0x0,0x5],[outputSize,clses]);_0x561cb2=_0x561cb2[_0x3d6b67(0x16b)](0x1),_0x925938=_0x925938[_0x3d6b67(0x13c)](xy_cal);let _0x3d2294=tf[_0x3d6b67(0x171)][_0x3d6b67(0x163)](_0x925938,_0x37ce74,maxOutputSize=0x3e8,iouThreshold=0.5,scoreThreshold=0.25),_0x2b3a58=_0x925938[_0x3d6b67(0x165)]();_0x2b3a58=Array[_0x3d6b67(0x16c)](_0x2b3a58);let _0x567e04=_0x561cb2[_0x3d6b67(0x165)]();_0x567e04=Array[_0x3d6b67(0x16c)](_0x567e04),xy_array=[];for(var _0x302df8=0x0;_0x302df8<_0x2b3a58[_0x3d6b67(0x15e)];_0x302df8+=0x4){xy_array[_0x3d6b67(0x140)]([_0x2b3a58[_0x302df8],_0x2b3a58[_0x302df8+0x1],_0x2b3a58[_0x302df8+0x2],_0x2b3a58[_0x302df8+0x3]]);}_0x3d2294=_0x3d2294['dataSync'](),_0x3d2294=Array[_0x3d6b67(0x16c)](_0x3d2294),cv['imshow'](_0x3d6b67(0x141),_0x4ea6b8);for(_0x302df8=0x0;_0x302df8<_0x3d2294[_0x3d6b67(0x15e)];_0x302df8++){let _0x373a0c=parseInt(xy_array[_0x3d2294[_0x302df8]][0x0]),_0x1081a3=parseInt(xy_array[_0x3d2294[_0x302df8]][0x1]),_0x4edb96=parseInt(xy_array[_0x3d2294[_0x302df8]][0x2]),_0x3b6b16=parseInt(xy_array[_0x3d2294[_0x302df8]][0x3]);ctx['strokeStyle']=_0x3d6b67(0x13d),ctx['lineWidth']=0x3,ctx['strokeRect'](_0x373a0c,_0x1081a3,_0x4edb96-_0x373a0c,_0x3b6b16-_0x1081a3),ctx[_0x3d6b67(0x16f)]=_0x3d6b67(0x161),ctx[_0x3d6b67(0x13a)]=_0x3d6b67(0x13d),ctx[_0x3d6b67(0x153)](classes[_0x567e04[_0x3d2294[_0x302df8]]],_0x373a0c,_0x1081a3-0xa);}_0x4ea6b8[_0x3d6b67(0x176)](),_0x1e546d[_0x3d6b67(0x176)](),_0x5e15ef['delete'](),tf[_0x3d6b67(0x14d)]()[_0x3d6b67(0x175)]();});}
+let width, height;
+
+function setSize() {
+    if (window.orientation == 0) {
+        //portrait
+        width = 642;
+        height = 856;
+    } else {
+        //landscape
+        width = 856;
+        height = 642;
+    }
+}
+const video = document.getElementById("video");
+const canvas = document.getElementById("output");
+
+let squareSize
+let inputSize = 320;
+let outputSize = 6300;
+let clses = 6;
+
+if (screen.availWidth >= 640){
+    squareSize = 640;
+    // 수정
+    // squareSize = 320;
+} else{
+    squareSize = screen.availWidth;
+    // 수정
+    // squareSize = 320;
+}
+
+// alert(squareSize)
+
+let classes = {
+    '0': 'Chilsung',
+    '1': 'Coca-Cola',
+    '2': 'Coca-Zero',
+    '3': 'Pepsi',
+    '4': 'PocariSweat',
+    '5': 'Sprite'
+}
+
+const constraints = {
+    video: {facingMode: "environment"}, audio: false
+};
+
+const ctx = canvas.getContext('2d');
+//const xy_cal = tf.tensor2d([320, 0, 320, 0, 0, 320, 0, 320, -160, 0, 160, 0, 0, -160, 0, 160], [4, 4]);
+const xy_cal = tf.tensor2d([1, 0, 1, 0, 0, 1, 0, 1, -0.5, 0, 0.5, 0, 0, -0.5, 0, 0.5], [4, 4]).mul(tf.scalar(squareSize));
+
+
+/*canvas.width = width;
+canvas.height = height;*/
+
+navigator.mediaDevices.getUserMedia(constraints)
+    .then(function (stream) {
+        video.width = width;
+        video.height = height;
+        video.srcObject = stream;
+        video.play();
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+let src, cap;
+
+const model = tf.loadGraphModel('./model/model.json');
+
+setTimeout(function() {
+    src = new cv.Mat(height, width, cv.CV_8UC4);
+    cap = new cv.VideoCapture("video");
+    window.setInterval(function(){
+        process();
+    },300);
+}, 10000);
+
+// let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
+
+function process() {
+    cap.read(src);
+    let rect = new cv.Rect(video.width / 2 - squareSize / 2, video.height / 2 - squareSize / 2, squareSize, squareSize);
+    let out_dst = src.roi(rect);
+    let dst = new cv.Mat();
+    let dsize = new cv.Size(inputSize, inputSize);
+    cv.resize(out_dst, dst, dsize, 0, 0, cv.INTER_AREA);
+    let tmp = new cv.Mat();
+    cv.cvtColor(dst, tmp, cv.COLOR_RGBA2RGB);
+    model.then(function (res) {
+        tf.engine().startScope();
+        let dst_tensor = tf.tensor(tmp.data, [inputSize, inputSize, 3]);
+        dst_tensor = dst_tensor.expandDims(0);
+        dst_tensor = dst_tensor.div(tf.scalar(255));
+        let pred = res.predict(dst_tensor).reshape([outputSize, 5+clses]);
+        let box = pred.slice([0, 0], [outputSize, 4]);
+        let score = pred.slice([0, 4], [outputSize, 1]).reshape([outputSize]);
+        let cls = pred.slice([0, 5], [outputSize, clses]);
+        cls = cls.argMax(1);
+        box = box.matMul(xy_cal);
+        let maxSup = tf.image.nonMaxSuppression(box, score, maxOutputSize = 1000, iouThreshold = 0.5, scoreThreshold = 0.25);
+        let box_array = box.dataSync();
+        box_array = Array.from(box_array);
+        let cls_array = cls.dataSync();
+        cls_array = Array.from(cls_array);
+        xy_array = [];
+        for (var i = 0; i < box_array.length; i += 4) {
+            xy_array.push([box_array[i], box_array[i + 1], box_array[i + 2], box_array[i + 3]]);
+        }
+        maxSup = maxSup.dataSync();
+        maxSup = Array.from(maxSup);
+        cv.imshow('output', out_dst);
+        for (i = 0; i < maxSup.length; i++) {
+            let x1 = parseInt(xy_array[maxSup[i]][0]);
+            let y1 = parseInt(xy_array[maxSup[i]][1]);
+            let x2 = parseInt(xy_array[maxSup[i]][2]);
+            let y2 = parseInt(xy_array[maxSup[i]][3]);
+            ctx.strokeStyle = 'red'; // 선 색
+            ctx.lineWidth = 3; // px단위
+            ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+            ctx.font = "25px Noto Serif KR";
+            ctx.fillStyle = 'red';
+            ctx.fillText(classes[cls_array[maxSup[i]]], x1, y1 - 10);
+            console.log(cls_array[maxSup[i]])
+        }
+        out_dst.delete();
+        dst.delete();
+        tmp.delete();
+        tf.engine().endScope();
+        //tf.dispose(dst_tensor);
+        //tf.dispose(pred);
+        //tf.dispose(box);
+        //tf.dispose(score);
+        //tf.dispose(cls);
+    });
+}
