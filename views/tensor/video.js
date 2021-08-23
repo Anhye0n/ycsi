@@ -68,51 +68,16 @@ let flag = true;
 
 let model = tf.loadGraphModel('indexeddb://my-model').then(function(){
     //캐시로 저장된거 대충 빨리 불러올 수 있음 여기에 빨리 불러올 경우 실행할 명령어 넣으면 됨
-    setTimeout(function () {
-        const container = document.getElementById('del_container');
-        const logo = document.getElementById('logo_container');
-
-        container.remove();
-        logo.style.display = 'flex'
-    }, 1500);
-
-    setTimeout(function() {
-        src = new cv.Mat(height, width, cv.CV_8UC4);
-        cap = new cv.VideoCapture("video");
-        window.setInterval(function(){
-            if(flag == true){
-                flag = false;
-                process();
-            }
-        },100);
-    }, 5000);
 }).catch(function(err){
     (model = tf.loadGraphModel('./model/model.json')).then(function(){
         model.then(function (res) {
             res.save('indexeddb://my-model');
             //캐시 없는경우 catch에 걸려서 모델 저장하게 됨
         });
-        //늦게 불러올 경우 실행할 명령 여기다 넣으면 됩니다.
-        setTimeout(function () {
-            const container = document.getElementById('del_container');
-            const logo = document.getElementById('logo_container');
-
-            container.remove();
-            logo.style.display = 'flex'
-        }, 5500);
-        setTimeout(function() {
-            src = new cv.Mat(height, width, cv.CV_8UC4);
-            cap = new cv.VideoCapture("video");
-            window.setInterval(function(){
-                if(flag == true){
-                    flag = false;
-                    process();
-                }
-            },100);
-        }, 5000);
+        //늦게 불러올 경우 실행할 명령 여기다 넣으면 됩니다 ㅁㄴㅇㄹ
     });
 });
-/*
+
 setTimeout(function() {
     src = new cv.Mat(height, width, cv.CV_8UC4);
     cap = new cv.VideoCapture("video");
@@ -122,7 +87,7 @@ setTimeout(function() {
             process();
         }
     },100);
-}, 5000);*/
+}, 5000);
 
 // let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
