@@ -162,7 +162,7 @@ function process() {
             max_num = (max_size < (x2 - x1) * (y2 - y1)) ? i : max_num;
         }
         if(maxSup.length !== 0){
-            cls_cnt[max_num] += 1;
+            cls_cnt[cls_array[maxSup[max_num]]] += 1;
             cnt += 1;
             if(cnt > 4){
                 speak(classes[argMax(cls_cnt)]);
