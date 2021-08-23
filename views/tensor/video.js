@@ -139,6 +139,8 @@ function process() {
         maxSup = maxSup.dataSync();
         maxSup = Array.from(maxSup);
         cv.imshow('output', out_dst);
+        let max_size = 0;
+        let max_num = 0;
         for (i = 0; i < maxSup.length; i++) {
             let x1 = parseInt(xy_array[maxSup[i]][0]);
             let y1 = parseInt(xy_array[maxSup[i]][1]);
