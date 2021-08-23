@@ -66,15 +66,11 @@ navigator.mediaDevices.getUserMedia(constraints)
 let src, cap;
 let flag = true;
 
-let model = tf.loadGraphModel('indexeddb://my-model').then(function(){
-    //캐시로 저장된거 대충 빨리 불러올 수 있음 여기에 빨리 불러올 경우 실행할 명령어 넣으면 됨
-}).catch(function(err){
+let model = tf.loadGraphModel('indexeddb://my-model').catch(function(err){
     (model = tf.loadGraphModel('./model/model.json')).then(function(){
         model.then(function (res) {
             res.save('indexeddb://my-model');
-            //캐시 없는경우 catch에 걸려서 모델 저장하게 됨
         });
-        //늦게 불러올 경우 실행할 명령 여기다 넣으면 됩니다 ㅁㄴㅇㄹ
     });
 });
 
@@ -87,7 +83,7 @@ setTimeout(function() {
             process();
         }
     },100);
-}, 5500);
+}, 1000);
 
 // let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
