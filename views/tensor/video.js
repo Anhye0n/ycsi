@@ -85,7 +85,7 @@ let model = tf.loadGraphModel('indexeddb://my-model').then(function(){
                 process();
             }
         },100);
-    }, 1000);
+    }, 5000);
 }).catch(function(err){
     (model = tf.loadGraphModel('./model/model.json')).then(function(){
         model.then(function (res) {
