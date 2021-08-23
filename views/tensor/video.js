@@ -1,3 +1,4 @@
+
 let width, height;
 
 function setSize() {
