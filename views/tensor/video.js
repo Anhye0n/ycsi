@@ -87,7 +87,7 @@ setTimeout(function() {
             process();
         }
     },100);
-}, 6000);
+}, 5000);
 
 // let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
