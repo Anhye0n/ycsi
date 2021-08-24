@@ -79,11 +79,25 @@
 </div>
 </body>
 <!--<script src="https://docs.opencv.org/3.4/opencv.js"></script>-->
+
 <script src="./tensor/opencv.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
-<script src="./tensor/video.js" charset="UTF-8"></script>
-
-<!--<script type="text/javascript">
+<script type="text/javascript" defer>
+    function OpenInterval() {
+        setTimeout(function () {
+            src = new cv.Mat(height, width, cv.CV_8UC4);
+            cap = new cv.VideoCapture("video");
+            window.setInterval(function () {
+                if (flag == true) {
+                    flag = false;
+                    process();
+                }
+            }, 100);
+        }, 4000)
+    }
+</script>
+<script src="./tensor/video.js" charset="UTF-8" onload="OpenInterval()"></script>
+<script type="text/javascript">
     setTimeout(function () {
         const container = document.getElementById('del_container');
         const logo = document.getElementById('logo_container');
@@ -91,5 +105,5 @@
         container.remove();
         logo.style.display = 'flex'
     }, 4500);
-</script>-->
+</script>
 </html>
