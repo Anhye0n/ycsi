@@ -86,6 +86,7 @@ let model = tf.loadGraphModel('indexeddb://my-model').catch(function (err) {
     },100);
 }, 4000);*/
 
+/*
 function OpenInterval() {
     src = new cv.Mat(height, width, cv.CV_8UC4);
     cap = new cv.VideoCapture("video");
@@ -96,6 +97,7 @@ function OpenInterval() {
         }
     }, 100);
 }
+*/
 
 // let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
