@@ -74,8 +74,7 @@ let model = tf.loadGraphModel('indexeddb://my-model').catch(function (err) {
         });
     });
 });
-cv['onRuntimeInitialized'] = () => {
-
+if (cv.getBuildInformation) {
     setTimeout(function () {
         const container = document.getElementById('del_container');
         const logo = document.getElementById('logo_container');
@@ -91,6 +90,29 @@ cv['onRuntimeInitialized'] = () => {
             }
         }, 300);
     }, 3000);
+} else {
+    // WASM
+    cv['onRuntimeInitialized'] = () => {
+        setTimeout(function () {
+            const container = document.getElementById('del_container');
+            const logo = document.getElementById('logo_container');
+            logo.style.display = 'flex'
+
+            container.remove();
+            src = new cv.Mat(height, width, cv.CV_8UC4);
+            cap = new cv.VideoCapture("video");
+            window.setInterval(function () {
+                if (flag == true) {
+                    flag = false;
+                    process();
+                }
+            }, 300);
+        }, 3000);
+    }
+}
+cv['onRuntimeInitialized'] = () => {
+
+
 };
 
 /*setTimeout(function() {
