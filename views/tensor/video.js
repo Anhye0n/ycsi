@@ -89,7 +89,7 @@ cv['onRuntimeInitialized'] = () => {
                 process();
             }
         }, 300);
-    }, 1000);
+    }, 3000);
 };
 
 /*setTimeout(function() {
