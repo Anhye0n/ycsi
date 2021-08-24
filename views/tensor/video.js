@@ -74,6 +74,23 @@ let model = tf.loadGraphModel('indexeddb://my-model').catch(function (err) {
         });
     });
 });
+cv['onRuntimeInitialized'] = () => {
+    setTimeout(function () {
+        const container = document.getElementById('del_container');
+        const logo = document.getElementById('logo_container');
+
+        container.remove();
+        logo.style.display = 'flex'
+        src = new cv.Mat(height, width, cv.CV_8UC4);
+        cap = new cv.VideoCapture("video");
+        window.setInterval(function () {
+            if (flag == true) {
+                flag = false;
+                process();
+            }
+        }, 300);
+    }, 1000);
+};
 
 /*setTimeout(function() {
     src = new cv.Mat(height, width, cv.CV_8UC4);
