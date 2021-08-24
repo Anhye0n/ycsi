@@ -75,7 +75,7 @@ let model = tf.loadGraphModel('indexeddb://my-model').catch(function (err) {
     });
 });
 
-setTimeout(function() {
+/*setTimeout(function() {
     src = new cv.Mat(height, width, cv.CV_8UC4);
     cap = new cv.VideoCapture("video");
     window.setInterval(function(){
@@ -84,8 +84,8 @@ setTimeout(function() {
             process();
         }
     },100);
-}, 4000);
-/*
+}, 4000);*/
+
 function OpenInterval() {
     src = new cv.Mat(height, width, cv.CV_8UC4);
     cap = new cv.VideoCapture("video");
@@ -96,7 +96,6 @@ function OpenInterval() {
         }
     }, 100);
 }
-*/
 
 // let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
