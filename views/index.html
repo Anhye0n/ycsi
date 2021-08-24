@@ -79,7 +79,9 @@
 </div>
 </body>
 <!--<script src="https://docs.opencv.org/3.4/opencv.js"></script>-->
-<script type="text/javascript">
+
+<script src="./tensor/opencv.js" defer></script>
+<script type="text/javascript" defer>
     function OpenInterval() {
         src = new cv.Mat(height, width, cv.CV_8UC4);
         cap = new cv.VideoCapture("video");
@@ -91,7 +93,6 @@
         }, 100);
     }
 </script>
-<script src="./tensor/opencv.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js" defer></script>
 <script src="./tensor/video.js" charset="UTF-8" defer onload="OpenInterval()"></script>
 <script type="text/javascript">
