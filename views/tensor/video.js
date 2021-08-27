@@ -84,7 +84,7 @@ setTimeout(function() {
             process();
         }
     },100);
-}, 4000);
+}, 7000);
 
 /*
 function OpenInterval() {
