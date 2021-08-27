@@ -170,7 +170,7 @@ function process() {
         if (maxSup.length !== 0) {
             cls_cnt[cls_array[maxSup[max_num]]] += 1;
             cnt += 1;
-            if (cnt > 13) {
+            if (cnt > 15) {
                 speak(argMax(cls_cnt));
                 cnt = 0;
                 for (let i = 0; i < cls_cnt.length; i++) {
