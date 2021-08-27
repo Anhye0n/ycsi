@@ -170,7 +170,7 @@ function process() {
         if (maxSup.length !== 0) {
             cls_cnt[cls_array[maxSup[max_num]]] += 1;
             cnt += 1;
-            if (cnt > 4) {
+            if (cnt > 13) {
                 speak(argMax(cls_cnt));
                 cnt = 0;
                 for (let i = 0; i < cls_cnt.length; i++) {
@@ -189,6 +189,6 @@ function process() {
 
 function speak(num){
     console.log('num : ' + num)
-    audio.src = '../src/audio/' + mp3_file[num]
+    audio.src = './src/audio/' + mp3_file[num]
     audio.play();
 }
