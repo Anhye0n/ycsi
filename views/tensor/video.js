@@ -12,6 +12,14 @@ function setSize() {
     }
 }
 
+const audio = new Audio();
+const mp3_list = 6 // 후에 노드 js로 목록 불러오기
+let mp3_file = []
+for (let i = 0; i < mp3_list; i++) {
+    mp3_file.push('audio_' + i + '.mp3')
+}
+console.log(mp3_file)
+
 const video = document.getElementById("video");
 const canvas = document.getElementById("output");
 
@@ -65,7 +73,15 @@ navigator.mediaDevices.getUserMedia(constraints)
     });
 
 let src, cap;
+let voices = [];
+let cls_cnt = [];
+let cnt = 0;
 let flag = true;
+for(let i = 0; i < clses; i++){
+    cls_cnt.push(0);
+}
+const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]).reduce(compareFn)[1]
+const argMax = argFact((min, el) => (el[0] > min[0] ? el : min))
 
 let model = tf.loadGraphModel('indexeddb://my-model').catch(function (err) {
     (model = tf.loadGraphModel('./model/model.json')).then(function () {
@@ -75,15 +91,15 @@ let model = tf.loadGraphModel('indexeddb://my-model').catch(function (err) {
     });
 });
 
-setTimeout(function() {
+setTimeout(function () {
     src = new cv.Mat(height, width, cv.CV_8UC4);
     cap = new cv.VideoCapture("video");
-    window.setInterval(function(){
-        if(flag == true){
+    window.setInterval(function () {
+        if (flag == true) {
             flag = false;
             process();
         }
-    },100);
+    }, 100);
 }, 7000);
 
 /*
@@ -133,6 +149,8 @@ function process() {
         maxSup = maxSup.dataSync();
         maxSup = Array.from(maxSup);
         cv.imshow('output', out_dst);
+        let max_size = 0;
+        let max_num = 0;
         for (i = 0; i < maxSup.length; i++) {
             let x1 = parseInt(xy_array[maxSup[i]][0]);
             let y1 = parseInt(xy_array[maxSup[i]][1]);
@@ -145,7 +163,22 @@ function process() {
             ctx.fillStyle = 'red';
             ctx.fillText(classes[cls_array[maxSup[i]]], x1, y1 - 10);
             console.log(cls_array[maxSup[i]])
+            max_size = (max_size < (x2 - x1) * (y2 - y1)) ? (x2 - x1) * (y2 - y1) : max_size;
+            max_num = (max_size < (x2 - x1) * (y2 - y1)) ? i : max_num;
+
         }
+        if (maxSup.length !== 0) {
+            cls_cnt[cls_array[maxSup[max_num]]] += 1;
+            cnt += 1;
+            if (cnt > 4) {
+                speak(argMax(cls_cnt));
+                cnt = 0;
+                for (let i = 0; i < cls_cnt.length; i++) {
+                    cls_cnt[i] = 0;
+                }
+            }
+        }
+
         out_dst.delete();
         dst.delete();
         tmp.delete();
@@ -154,3 +187,8 @@ function process() {
     flag = true;
 }
 
+function speak(num){
+    console.log('num : ' + num)
+    audio.src = '../src/audio/' + mp3_file[num]
+    audio.play();
+}
