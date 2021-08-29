@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Expires" content=0>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>YCSI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--css-->
+    <link rel="stylesheet" href="./src/css/main.css">
+    <link rel="stylesheet" href="./src/css/loader.css">
+    <script type="text/javascript">
+        function device_check() {
+            // 디바이스 종류 설정
+            const pc_device = "win16|win32|win64|mac|macintel";
+
+            // 접속한 디바이스 환경
+            const this_device = navigator.platform;
+            const index_canvas = document.getElementById('output');
+
+            if (this_device) {
+                if (pc_device.indexOf(navigator.platform.toLowerCase()) < 0) {
+                    index_canvas.style.width = screen.availWidth + 'px'
+                    // 수정
+                    // index_canvas.style.width = '320px'
+                } else {
+                    index_canvas.style.width = '640px'
+                    // 수정
+                    // index_canvas.style.width = '320px'
+                }
+            }
+        }
+    </script>
+</head>
+
+<body onload="setSize(); device_check();">
+<div id="del_container">
+    <div id="loading-container">
+        <div class="loading"></div>
+        <div id="loading-text">loading</div>
+    </div>
+    <!--<p id="link">Please wait for 7 seconds.</p>-->
+    <p id="link">서버 개발자의 능력부족으로 로딩이 오래걸립니다..</p>
+</div>
+<div id="add_container" style="display: none;text-align: center">
+    <div id="canvas_box" style="margin-top: 40px">
+        <p class="warning" style="color: #000000; font-size: 1rem;">캔을 카메라에 보여주세요!</p>
+        <p class="warning">※ 기능이 실행될 때까지 약간의 시간이 걸릴 수 있습니다.</p>
+        <p class="warning">※ 카메라가 기다려도 켜지지 않는다면 카메라 허용 후 새로고침 해주세요!.</p>
+        <canvas id="output"></canvas>
+        <video id="video" style="display: none;"></video>
+        <p id="update">Last Update : 2021-08-18</p>
+        <p id="identify_big">인식 가능한 캔</p>
+        <p id="identify_small">칠성사이다, 스프라이트, 코카콜라, 코카콜라 제로, 펩시, 포카리스웨트</p>
+    </div>
+</div>
+</body>
+<script src="./tensor/opencv.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
+<script src="./tensor/video.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    setTimeout(function () {
+        const container = document.getElementById('del_container');
+        const logo = document.getElementById('add_container');
+
+        container.remove();
+        logo.style.display = 'contents'
+    }, 7500);
+</script>
+</html>
