@@ -190,6 +190,7 @@ const button = document.getElementById('my-button')
 
 function speak(num){
     button.addEventListener('click', () => {
+        cnt = 0
         console.log('num : ' + num)
         audio.src = './src/audio/' + mp3_file[num]
         setTimeout(() => { audio.play() }, 300)
