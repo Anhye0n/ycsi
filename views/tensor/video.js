@@ -190,5 +190,5 @@ function process() {
 function speak(num){
     console.log('num : ' + num)
     audio.src = './src/audio/' + mp3_file[num]
-    audio.play();
+    setTimeout(() => { audio.play() }, 300)
 }
