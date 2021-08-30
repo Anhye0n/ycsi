@@ -188,14 +188,15 @@ function process() {
 }
 
 const button = document.getElementById('my-button')
+function speak(num) {
+    console.log('num : ' + num)
+    audio.src = './src/audio/' + mp3_file[num]
+    setTimeout(() => {
+        audio.play()
+    }, 300)
+}
 button.addEventListener('click', () => {
-    function speak(num) {
-        console.log('num : ' + num)
-        audio.src = './src/audio/' + mp3_file[num]
-        setTimeout(() => {
-            audio.play()
-        }, 300)
-    }
+    speak()
 })
 
 //
