@@ -77,7 +77,7 @@ let voices = [];
 let cls_cnt = [];
 let cnt = 0;
 let flag = true;
-for(let i = 0; i < clses; i++){
+for (let i = 0; i < clses; i++) {
     cls_cnt.push(0);
 }
 const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]).reduce(compareFn)[1]
@@ -186,15 +186,18 @@ function process() {
     });
     flag = true;
 }
-const button = document.getElementById('my-button')
 
-function speak(num){
-    button.addEventListener('click', () => {
+const button = document.getElementById('my-button')
+button.addEventListener('click', () => {
+    function speak(num) {
         console.log('num : ' + num)
         audio.src = './src/audio/' + mp3_file[num]
-        setTimeout(() => { audio.play() }, 300)
-    })
-}
+        setTimeout(() => {
+            audio.play()
+        }, 300)
+    }
+})
+
 //
 // function speak(num){
 //     console.log('num : ' + num)
