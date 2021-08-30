@@ -27,6 +27,8 @@
                 if (pc_device.indexOf(navigator.platform.toLowerCase()) < 0) {
                     index_canvas.style.width = screen.availWidth + 'px'
                     button.style.width = screen.availWidth + 'px'
+                    button.style.height = (screen.availHeight - screen.availWidth) + 'px'
+                    alert((screen.availHeight - screen.availWidth) + 'px')
                     // 수정
                     // index_canvas.style.width = '320px'
                 } else {
