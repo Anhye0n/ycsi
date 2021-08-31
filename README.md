@@ -1,11 +1,13 @@
-# 팀원
+[Angit]: https://google.com "AnHye0n Github"
+[Kimgit]: https://github.com/Delta-Life "Kim Github"
 
-- 안정현 https://github.com/Anhye0n/
-- 김일중 https://github.com/Delta-Life
+# 팀원
+- [안정현][Angit]
+- [김일중][Kimgit]
 
 # 프로젝트 소개
 
-시각장애인을 위한 캔 음료  음성안내 앱
+**시각장애인을 위한 캔 음료 음성안내 앱**
 
 추후 여러 물건들을 인식하는 종합 플랫폼으로 개발될 예정
 
@@ -39,8 +41,9 @@ class 명을 읽어주는 tts파일을 준비하여 audio 폴더에 audio_num.mp
 
 JS autoplay 기능이 IOS 및 Safari 브라우저 에서 호환이 안되는 경우가 있어 스마트폰 화면 아래를 터치(버튼)하면 소리가 재생되는 걸로 수정
 
-초기엔 tts서비스를 이용하였지만, 각종 기기와 환경에 적용하기에 무리가 있어 audio폴더 안에 소리를 재생하는 것으로 함
-*Ex) 0번째 클래스를 인식할 경우 audio_0.mp3가 재생됨.*
+## 참고사항
+- 초기엔 tts서비스를 이용하였지만, 각종 기기와 환경에 적용하기에 무리가 있어 audio폴더 안에 소리를 재생하는 것으로 함
+    - Ex) 0번째 클래스를 인식할 경우 audio_0.mp3가 재생됨.
 
 # tensorflow.js를 사용하여 웹페이지를 만든 이유
 
