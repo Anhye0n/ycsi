@@ -1,4 +1,4 @@
-[Angit]: https://google.com "AnHye0n Github"
+[Angit]: https://github.com/Anhye0n "AnHye0n Github"
 [Kimgit]: https://github.com/Delta-Life "Kim Github"
 
 # 팀원
