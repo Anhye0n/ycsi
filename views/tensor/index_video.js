@@ -11,6 +11,15 @@ function setSize() {
         height = 642;
     }
 }
+
+const audio = new Audio();
+const mp3_list = 6 // 후에 노드 js로 목록 불러오기
+let mp3_file = []
+for (let i = 0; i < mp3_list; i++) {
+    mp3_file.push('audio_' + i + '.mp3')
+}
+console.log(mp3_file)
+
 const video = document.getElementById("video");
 const canvas = document.getElementById("output");
 
@@ -19,11 +28,11 @@ let inputSize = 320;
 let outputSize = 6300;
 let clses = 6;
 
-if (screen.availWidth >= 640){
+if (screen.availWidth >= 640) {
     squareSize = 640;
     // 수정
     // squareSize = 320;
-} else{
+} else {
     squareSize = screen.availWidth;
     // 수정
     // squareSize = 320;
@@ -32,19 +41,14 @@ if (screen.availWidth >= 640){
 // alert(squareSize)
 
 let classes = {
-    '0': '칠성사이다',
-    '1': '코카콜라',
-    '2': '코카콜라제로',
-    '3': '펩시',
-    '4': '포카리스웨트',
-    '5': '스프라이트'
-}
-/*'0': 'Chilsung',
+    '0': 'Chilsung',
     '1': 'Coca-Cola',
     '2': 'Coca-Zero',
     '3': 'Pepsi',
     '4': 'PocariSweat',
-    '5': 'Sprite'*/
+    '5': 'Sprite'
+}
+
 const constraints = {
     video: {facingMode: "environment"}, audio: false
 };
@@ -69,41 +73,47 @@ navigator.mediaDevices.getUserMedia(constraints)
     });
 
 let src, cap;
+let voices = [];
+let cls_cnt = [];
+let cnt = 0;
 let flag = true;
+for(let i = 0; i < clses; i++){
+    cls_cnt.push(0);
+}
+const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]).reduce(compareFn)[1]
+const argMax = argFact((min, el) => (el[0] > min[0] ? el : min))
 
-
-let model = tf.loadGraphModel('indexeddb://my-model').catch(function(err){
-    (model = tf.loadGraphModel('./model/model.json')).then(function(){
+let model = tf.loadGraphModel('indexeddb://my-model').catch(function (err) {
+    (model = tf.loadGraphModel('./model/model.json')).then(function () {
         model.then(function (res) {
             res.save('indexeddb://my-model');
         });
     });
 });
 
-setVoiceList();
+setTimeout(function () {
+    src = new cv.Mat(height, width, cv.CV_8UC4);
+    cap = new cv.VideoCapture("video");
+    window.setInterval(function () {
+        if (flag == true) {
+            flag = false;
+            process();
+        }
+    }, 100);
+}, 7000);
 
-if (window.speechSynthesis.onvoiceschanged !== undefined) {
-    window.speechSynthesis.onvoiceschanged = setVoiceList;
+/*
+function OpenInterval() {
+    src = new cv.Mat(height, width, cv.CV_8UC4);
+    cap = new cv.VideoCapture("video");
+    window.setInterval(function () {
+        if (flag == true) {
+            flag = false;
+            process();
+        }
+    }, 100);
 }
-
-cv['onRuntimeInitialized'] = () => {
-    setTimeout(function () {
-        const container = document.getElementById('del_container');
-        const logo = document.getElementById('logo_container');
-
-        container.remove();
-        logo.style.display = 'flex'
-        src = new cv.Mat(height, width, cv.CV_8UC4);
-        cap = new cv.VideoCapture("video");
-        window.setInterval(function () {
-            if (flag == true) {
-                flag = false;
-                process();
-            }
-        }, 300);
-    }, 1000);
-};
-
+*/
 
 // let RandomColor = "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
@@ -121,7 +131,7 @@ function process() {
         let dst_tensor = tf.tensor(tmp.data, [inputSize, inputSize, 3]);
         dst_tensor = dst_tensor.expandDims(0);
         dst_tensor = dst_tensor.div(tf.scalar(255));
-        let pred = res.predict(dst_tensor).reshape([outputSize, 5+clses]);
+        let pred = res.predict(dst_tensor).reshape([outputSize, 5 + clses]);
         let box = pred.slice([0, 0], [outputSize, 4]);
         let score = pred.slice([0, 4], [outputSize, 1]).reshape([outputSize]);
         let cls = pred.slice([0, 5], [outputSize, clses]);
@@ -133,7 +143,7 @@ function process() {
         let cls_array = cls.dataSync();
         cls_array = Array.from(cls_array);
         xy_array = [];
-        for (let i = 0; i < box_array.length; i += 4) {
+        for (var i = 0; i < box_array.length; i += 4) {
             xy_array.push([box_array[i], box_array[i + 1], box_array[i + 2], box_array[i + 3]]);
         }
         maxSup = maxSup.dataSync();
@@ -152,13 +162,31 @@ function process() {
             ctx.font = "25px Noto Serif KR";
             ctx.fillStyle = 'red';
             ctx.fillText(classes[cls_array[maxSup[i]]], x1, y1 - 10);
+            console.log(cls_array[maxSup[i]])
             max_size = (max_size < (x2 - x1) * (y2 - y1)) ? (x2 - x1) * (y2 - y1) : max_size;
             max_num = (max_size < (x2 - x1) * (y2 - y1)) ? i : max_num;
+
         }
+        if (maxSup.length !== 0) {
+            cls_cnt[cls_array[maxSup[max_num]]] += 1;
+            cnt += 1;
+            if (cnt > 11) {
+                speak(argMax(cls_cnt));
+                cnt = 0;
+                for (let i = 0; i < cls_cnt.length; i++) {
+                    cls_cnt[i] = 0;
+                }
+            }
+        }
+
         out_dst.delete();
         dst.delete();
         tmp.delete();
         tf.engine().endScope();
     });
     flag = true;
+}
+
+function speak(num){
+    audio.src = './src/audio/' + mp3_file[num]
 }
