@@ -17,9 +17,9 @@
 
 # 프로젝트(코드) 사용법
 
-[https://github.com/ultralytics/yolov5](https://github.com/ultralytics/yolov5)를 참고하여 사용하고자 하는 custom yolov5 모델을 제작한다.
+인식을 원하는 타겟들의 데이터를 [Object Detection 라이브러리](https://github.com/ultralytics/yolov5)를 참고하여 pt파일 모델로 제작한다.
 
-[https://github.com/zldrobit/yolov5.git](https://github.com/zldrobit/yolov5.git)를 침고하여 yolov5 모델을 tensorflow 모델으로 변환한다.
+[pt파일 변환](https://github.com/zldrobit/yolov5.git)해주는 라이브러리를 이용하여 웹앱에서 사용하기 위한 json(tensorflow.js)모델로 변환한다.(아래 코드 참고)
 
 ```python
 !python models/tf.py --weights weights/best.pt --cfg models/yolov5s.yaml --img 320
@@ -31,19 +31,17 @@
     /path/to/converted_model
 ```
 
-명령어를 이용하여 tensorflow 모델을 tensorflow.js 모델으로 변환한다.
-
-이 repository를 clone하여 model 폴더 안에 tensorflow.js 모델을 넣는다.
+이 repository를 clone하여 model 폴더 안에 변환된 tensorflow.js 모델을 넣는다.
 
 변환된 모델의 class의 개수와 class 명에 따라 tensor/video.js의 clses값과 classes의 class 명을 수정한다.
 
-class 명을 읽어주는 tts파일을 준비하여 audio 폴더에 audio_num.mp3형태로 준비한다.
+class 명을 읽어주는 mp3 파일을 준비하여 audio 폴더에 audio_num.mp3형태로 준비한다.
 
 JS autoplay 기능이 IOS 및 Safari 브라우저 에서 호환이 안되는 경우가 있어 스마트폰 화면 아래를 터치(버튼)하면 소리가 재생되는 걸로 수정
 
 ## 참고사항
-- 초기엔 tts서비스를 이용하였지만, 각종 기기와 환경에 적용하기에 무리가 있어 audio폴더 안에 소리를 재생하는 것으로 함
-    - Ex) 0번째 클래스를 인식할 경우 audio_0.mp3가 재생됨.
+- 초기엔 구글 tts서비스와 같은 다양한 tts를 이용하였지만, 각종 기기와 환경(iOS, Safari)에 적용하기에 무리가 있어 audio폴더 안에 소리를 재생하는 것으로 함
+  - Ex) 0번째 클래스를 인식할 경우 audio_0.mp3가 재생됨.
 
 # tensorflow.js를 사용하여 웹페이지를 만든 이유
 
