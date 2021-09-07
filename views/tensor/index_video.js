@@ -127,7 +127,7 @@ function process() {
         let cls = pred.slice([0, 5], [outputSize, clses]);
         cls = cls.argMax(1);
         box = box.matMul(xy_cal);
-        let maxSup = tf.image.nonMaxSuppression(box, score, maxOutputSize = 1000, iouThreshold = 0.5, scoreThreshold = 0.5);
+        let maxSup = tf.image.nonMaxSuppression(box, score, maxOutputSize = 1000, iouThreshold = 0.5, scoreThreshold = 0.65);
         let box_array = box.dataSync();
         box_array = Array.from(box_array);
         let cls_array = cls.dataSync();
