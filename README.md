@@ -1,5 +1,6 @@
 [Angit]: https://github.com/Anhye0n "AnHye0n Github"
 [Kimgit]: https://github.com/Delta-Life "Kim Github"
+[ycsi_android]: https://github.com/Anhye0n/ycsi_android/ "ycsi_android"
 
 # 팀원
 - [안정현][Angit]
@@ -46,3 +47,6 @@ JS autoplay 기능이 IOS 및 Safari 브라우저 에서 호환이 안되는 경
 # tensorflow.js를 사용하여 웹페이지를 만든 이유
 
 javascript를 이용하여 제작되어 client에서 직접 인공지능 연산을 하게 되므로 서버의 성능에 영향을 받지 않으며, 이미지 정보에 대한 보안 문제도 해결할 수 있다. 그 외에도, 웹페이지에서 인공지능 연산을 수행하므로, web view를 이용한 안드로이드, IOS 애플리케이션으로 활용이 쉽다.
+
+# 안드로이드
+[안드로이드 코드][ycsi_android]
