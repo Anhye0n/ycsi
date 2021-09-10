@@ -189,4 +189,5 @@ function process() {
 
 function speak(num){
     audio.src = './src/audio/' + mp3_file[num]
+    audio.play()
 }
